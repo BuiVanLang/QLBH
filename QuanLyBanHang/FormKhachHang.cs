@@ -1,0 +1,211 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;    
+namespace QuanLyBanHang
+{
+    public partial class FormKhachHang : Form
+    {
+        private readonly string Nguon = @"Data Source=BuiVanLang;Initial Catalog=QLBH3;Integrated Security=True";
+        
+        public FormKhachHang()
+        {
+            InitializeComponent();
+            buttonThem.Click += ButtonThem_Click;
+            buttonSua.Click += ButtonSua_Click;
+            buttonXoa.Click += ButtonXoa_Click;
+            buttonThoat.Click += buttonThoat_Click;
+            dataGridViewKhachHang.CellClick += DataGridViewKhachHang_CellClick;
+            this.Load += FormKhachHang_Load;
+        }
+
+        private void FormKhachHang_Load(object sender, EventArgs e)
+        {
+            LoadKhachHang();
+            ResetForm();
+        }
+
+        private void LoadKhachHang()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Nguon))
+                {
+                    conn.Open();
+                    // Lấy đúng tên cột gốc, không dùng alias
+                    string sql = "SELECT ID, Ten, GioiTinh, NgaySinh, DiaChi, SDT FROM KhachHang";
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(sql, conn))
+                    {
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+                        dataGridViewKhachHang.AutoGenerateColumns = false; // QUAN TRỌNG!
+dataGridViewKhachHang.Columns.Clear();
+dataGridViewKhachHang.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Mã KH", DataPropertyName = "ID", Name = "ID" });
+dataGridViewKhachHang.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "TênKH", DataPropertyName = "Ten", Name = "Ten" });
+dataGridViewKhachHang.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Giới Tính", DataPropertyName = "GioiTinh", Name = "GioiTinh" });
+dataGridViewKhachHang.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Ngày Sinh", DataPropertyName = "NgaySinh", Name = "NgaySinh" });
+dataGridViewKhachHang.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Địa Chỉ", DataPropertyName = "DiaChi", Name = "DiaChi" });
+dataGridViewKhachHang.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Số Điện Thoại", DataPropertyName = "SDT", Name = "SDT" });
+                        dataGridViewKhachHang.DataSource = dt;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
+            }
+        }       
+
+        private void ResetForm()
+        {
+            textBoxMaKH.Text = "";
+            textBoxTenKH.Text = "";
+            radioButtonNam.Checked = true;
+            radioButtonNu.Checked = false;
+            dateTimePickerNgaySinh.Value = DateTime.Now;
+            textBoxDiaChi.Text = "";
+            textBoxSoDienThoai.Text = "";
+        }
+
+        private void DataGridViewKhachHang_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridViewKhachHang.Rows[e.RowIndex];
+
+                // Kiểm tra null trước khi gán
+                textBoxMaKH.Text = row.Cells["ID"].Value?.ToString();
+                textBoxTenKH.Text = row.Cells["Ten"].Value?.ToString();
+
+                string gioiTinh = row.Cells["GioiTinh"].Value?.ToString();
+                if (gioiTinh == "Nam")
+                {
+                    radioButtonNam.Checked = true;
+                    radioButtonNu.Checked = false;
+                }
+                else
+                {
+                    radioButtonNam.Checked = false;
+                    radioButtonNu.Checked = true;
+                }
+
+                if (row.Cells["NgaySinh"].Value != null)
+                    dateTimePickerNgaySinh.Value = Convert.ToDateTime(row.Cells["NgaySinh"].Value);
+
+                textBoxDiaChi.Text = row.Cells["DiaChi"].Value?.ToString();
+                textBoxSoDienThoai.Text = row.Cells["SDT"].Value?.ToString();
+            }
+        }
+
+
+        private void ButtonThem_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxTenKH.Text))
+            {
+                MessageBox.Show("Vui lòng nhập tên khách hàng!");
+                return;
+            }
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Nguon))
+                {
+                    conn.Open();
+                    string sql = "INSERT INTO KhachHang (Ten, GioiTinh, NgaySinh, DiaChi, SDT) VALUES (@Ten, @GioiTinh, @NgaySinh, @DiaChi, @SDT)";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Ten", textBoxTenKH.Text.Trim());
+                        cmd.Parameters.AddWithValue("@GioiTinh", radioButtonNam.Checked ? "Nam" : "Nữ");
+                        cmd.Parameters.AddWithValue("@NgaySinh", dateTimePickerNgaySinh.Value.Date);
+                        cmd.Parameters.AddWithValue("@DiaChi", textBoxDiaChi.Text.Trim());
+                        cmd.Parameters.AddWithValue("@SDT", textBoxSoDienThoai.Text.Trim());
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Thêm khách hàng thành công!");
+                LoadKhachHang();
+                ResetForm();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }
+        }
+
+        private void ButtonSua_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxMaKH.Text))
+            {
+                MessageBox.Show("Vui lòng chọn khách hàng để sửa!");
+                return;
+            }
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Nguon))
+                {
+                    conn.Open();
+                    string sql = "UPDATE KhachHang SET Ten=@Ten, GioiTinh=@GioiTinh, NgaySinh=@NgaySinh, DiaChi=@DiaChi, SDT=@SDT WHERE ID=@ID";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ID", int.Parse(textBoxMaKH.Text));
+                        cmd.Parameters.AddWithValue("@Ten", textBoxTenKH.Text.Trim());
+                        cmd.Parameters.AddWithValue("@GioiTinh", radioButtonNam.Checked ? "Nam" : "Nữ");
+                        cmd.Parameters.AddWithValue("@NgaySinh", dateTimePickerNgaySinh.Value.Date);
+                        cmd.Parameters.AddWithValue("@DiaChi", textBoxDiaChi.Text.Trim());
+                        cmd.Parameters.AddWithValue("@SDT", textBoxSoDienThoai.Text.Trim());
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Sửa khách hàng thành công!");
+                LoadKhachHang();
+                ResetForm();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }
+        }
+
+        private void ButtonXoa_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxMaKH.Text))
+            {
+                MessageBox.Show("Vui lòng chọn khách hàng để xóa!");
+                return;
+            }
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa khách hàng này?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(Nguon))
+                    {
+                        conn.Open();
+                        string sql = "DELETE FROM KhachHang WHERE ID=@ID";
+                        using (SqlCommand cmd = new SqlCommand(sql, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@ID", int.Parse(textBoxMaKH.Text));
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    MessageBox.Show("Xóa khách hàng thành công!");
+                    LoadKhachHang();
+                    ResetForm();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi: " + ex.Message);
+                }
+            }
+        }
+
+        private void buttonThoat_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+}

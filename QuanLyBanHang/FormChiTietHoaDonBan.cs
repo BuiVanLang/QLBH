@@ -1,0 +1,227 @@
+﻿using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows.Forms;
+
+namespace QuanLyBanHang
+{
+    public partial class FormChiTietHoaDonBan : Form
+    {
+        private readonly string Nguon = @"Data Source=BuiVanLang;Initial Catalog=QLBH3;Integrated Security=True";
+
+        public FormChiTietHoaDonBan()
+        {
+            InitializeComponent();
+            SetupEventHandlers();
+        }
+
+        private void SetupEventHandlers()
+        {
+            dataGridViewChiTietHoaDon.CellClick += dataGridViewChiTietHoaDon_CellClick;
+            buttonThem.Click += buttonThem_Click;
+            buttonSua.Click += buttonSua_Click;
+            buttonXoa.Click += buttonXoa_Click;
+            buttonThoat.Click += buttonThoat_Click;
+
+            this.Load += FormChiTietHoaDonBan_Load;
+        }
+
+        private void FormChiTietHoaDonBan_Load(object sender, EventArgs e)
+        {
+            LoadHangHoa();
+            LoadData();
+        }
+
+        // Load dữ liệu chi tiết hóa đơn
+        private void LoadData()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Nguon))
+                {
+                    string sql = @"SELECT c.ID, c.ID_HangHoa, h.TenHang, c.SoLuong, c.GiamGia
+                                   FROM ChiTietHoaDonBan1 c
+                                   INNER JOIN HangHoa h ON c.ID_HangHoa = h.ID
+                                   ORDER BY c.ID";
+                    SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dataGridViewChiTietHoaDon.DataSource = dt;
+
+                    if (dataGridViewChiTietHoaDon.Columns.Count > 0)
+                    {
+                        dataGridViewChiTietHoaDon.Columns["ID"].HeaderText = "ID";
+                        dataGridViewChiTietHoaDon.Columns["ID_HangHoa"].HeaderText = "Mã Hàng";
+                        dataGridViewChiTietHoaDon.Columns["TenHang"].HeaderText = "Tên Hàng";
+                        dataGridViewChiTietHoaDon.Columns["SoLuong"].HeaderText = "Số Lượng";
+                        dataGridViewChiTietHoaDon.Columns["GiamGia"].HeaderText = "Giảm Giá";
+
+                        dataGridViewChiTietHoaDon.Columns["SoLuong"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        dataGridViewChiTietHoaDon.Columns["GiamGia"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải dữ liệu: " + ex.Message);
+            }
+        }
+
+        // Load danh sách hàng hóa vào combobox
+        private void LoadHangHoa()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Nguon))
+                {
+                    string sql = "SELECT ID, TenHang FROM HangHoa ORDER BY TenHang";
+                    SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    DataRow emptyRow = dt.NewRow();
+                    emptyRow["ID"] = 0;
+                    emptyRow["TenHang"] = "-- Chọn hàng hóa --";
+                    dt.Rows.InsertAt(emptyRow, 0);
+
+                    comboBoxMaHangHoa.DataSource = dt;
+                    comboBoxMaHangHoa.DisplayMember = "TenHang";
+                    comboBoxMaHangHoa.ValueMember = "ID";
+                    comboBoxMaHangHoa.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải hàng hóa: " + ex.Message);
+            }
+        }
+
+        // Xóa input
+        private void ClearInputs()
+        {
+            if (comboBoxMaHangHoa.Items.Count > 0)
+                comboBoxMaHangHoa.SelectedIndex = 0;
+            numtBoxGiamGiSoLuong.Value = 0;
+            textBoxGiamGia.Text = "";
+            dataGridViewChiTietHoaDon.ClearSelection();
+        }
+
+        // Thêm dữ liệu
+        private void buttonThem_Click(object sender, EventArgs e)
+        {
+            if ((int)comboBoxMaHangHoa.SelectedValue == 0)
+            {
+                MessageBox.Show("Vui lòng chọn hàng hóa!");
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Nguon))
+                {
+                    string sql = "INSERT INTO ChiTietHoaDonBan1 (ID_HangHoa, SoLuong, GiamGia) VALUES (@ID_HangHoa, @SoLuong, @GiamGia)";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+
+                    cmd.Parameters.AddWithValue("@ID_HangHoa", comboBoxMaHangHoa.SelectedValue);
+                    cmd.Parameters.AddWithValue("@SoLuong", Convert.ToInt32(numtBoxGiamGiSoLuong.Value));
+                    cmd.Parameters.AddWithValue("@GiamGia", string.IsNullOrWhiteSpace(textBoxGiamGia.Text) ? 0 : Convert.ToDecimal(textBoxGiamGia.Text));
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Thêm chi tiết hóa đơn thành công!");
+                    LoadData();
+                    ClearInputs();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi thêm dữ liệu: " + ex.Message);
+            }
+        }
+
+        // Sửa dữ liệu
+        private void buttonSua_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewChiTietHoaDon.CurrentRow == null) return;
+
+            int id = Convert.ToInt32(dataGridViewChiTietHoaDon.CurrentRow.Cells["ID"].Value);
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Nguon))
+                {
+                    string sql = @"UPDATE ChiTietHoaDonBan1 
+                                   SET ID_HangHoa = @ID_HangHoa, SoLuong = @SoLuong, GiamGia = @GiamGia 
+                                   WHERE ID = @ID";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+
+                    cmd.Parameters.AddWithValue("@ID_HangHoa", comboBoxMaHangHoa.SelectedValue);
+                    cmd.Parameters.AddWithValue("@SoLuong", Convert.ToInt32(numtBoxGiamGiSoLuong.Value));
+                    cmd.Parameters.AddWithValue("@GiamGia", string.IsNullOrWhiteSpace(textBoxGiamGia.Text) ? 0 : Convert.ToDecimal(textBoxGiamGia.Text));
+                    cmd.Parameters.AddWithValue("@ID", id);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Sửa chi tiết hóa đơn thành công!");
+                    LoadData();
+                    ClearInputs();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi sửa dữ liệu: " + ex.Message);
+            }
+        }
+
+        // Xóa dữ liệu
+        private void buttonXoa_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewChiTietHoaDon.CurrentRow == null) return;
+
+            int id = Convert.ToInt32(dataGridViewChiTietHoaDon.CurrentRow.Cells["ID"].Value);
+            DialogResult confirm = MessageBox.Show("Bạn có chắc muốn xóa?", "Xác nhận", MessageBoxButtons.YesNo);
+            if (confirm == DialogResult.No) return;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Nguon))
+                {
+                    string sql = "DELETE FROM ChiTietHoaDonBan1 WHERE ID=@ID";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@ID", id);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Xóa chi tiết hóa đơn thành công!");
+                    LoadData();
+                    ClearInputs();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi xóa dữ liệu: " + ex.Message);
+            }
+        }
+
+        // Thoát
+        private void buttonThoat_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        // Hiển thị dữ liệu khi chọn row
+        private void dataGridViewChiTietHoaDon_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridViewChiTietHoaDon.Rows[e.RowIndex];
+                comboBoxMaHangHoa.SelectedValue = row.Cells["ID_HangHoa"].Value;
+                numtBoxGiamGiSoLuong.Value = Convert.ToDecimal(row.Cells["SoLuong"].Value);
+                textBoxGiamGia.Text = row.Cells["GiamGia"].Value?.ToString() ?? "";
+            }
+        }
+    }
+}
