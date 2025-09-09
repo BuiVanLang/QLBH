@@ -53,8 +53,8 @@
             this.buttonXoa = new System.Windows.Forms.Button();
             this.buttonThoat = new System.Windows.Forms.Button();
             this.dateTimePickerNgaySinh = new System.Windows.Forms.DateTimePicker();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.buttonTimKiem = new System.Windows.Forms.Button();
+            this.textBoxTimKiem = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNhanVien)).BeginInit();
             this.SuspendLayout();
             // 
@@ -118,7 +118,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label5.Location = new System.Drawing.Point(527, 66);
+            this.label5.Location = new System.Drawing.Point(495, 66);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(125, 26);
             this.label5.TabIndex = 6;
@@ -136,7 +136,7 @@
             // 
             // textBoxDiaChi
             // 
-            this.textBoxDiaChi.Location = new System.Drawing.Point(697, 122);
+            this.textBoxDiaChi.Location = new System.Drawing.Point(660, 122);
             this.textBoxDiaChi.Name = "textBoxDiaChi";
             this.textBoxDiaChi.Size = new System.Drawing.Size(247, 26);
             this.textBoxDiaChi.TabIndex = 9;
@@ -145,7 +145,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label7.Location = new System.Drawing.Point(527, 180);
+            this.label7.Location = new System.Drawing.Point(456, 178);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(164, 26);
             this.label7.TabIndex = 10;
@@ -153,7 +153,7 @@
             // 
             // textBoxSoDienThoai
             // 
-            this.textBoxSoDienThoai.Location = new System.Drawing.Point(697, 180);
+            this.textBoxSoDienThoai.Location = new System.Drawing.Point(660, 178);
             this.textBoxSoDienThoai.Name = "textBoxSoDienThoai";
             this.textBoxSoDienThoai.Size = new System.Drawing.Size(247, 26);
             this.textBoxSoDienThoai.TabIndex = 11;
@@ -192,7 +192,7 @@
             this.NgaySinh,
             this.DiaChi,
             this.SoDienThoai});
-            this.dataGridViewNhanVien.Location = new System.Drawing.Point(109, 361);
+            this.dataGridViewNhanVien.Location = new System.Drawing.Point(48, 361);
             this.dataGridViewNhanVien.Name = "dataGridViewNhanVien";
             this.dataGridViewNhanVien.ReadOnly = true;
             this.dataGridViewNhanVien.RowHeadersWidth = 62;
@@ -296,27 +296,27 @@
             // 
             // dateTimePickerNgaySinh
             // 
-            this.dateTimePickerNgaySinh.Location = new System.Drawing.Point(697, 66);
+            this.dateTimePickerNgaySinh.Location = new System.Drawing.Point(660, 66);
             this.dateTimePickerNgaySinh.Name = "dateTimePickerNgaySinh";
             this.dateTimePickerNgaySinh.Size = new System.Drawing.Size(247, 26);
             this.dateTimePickerNgaySinh.TabIndex = 19;
             // 
-            // textBox1
+            // textBoxTimKiem
             // 
-            this.textBox1.Location = new System.Drawing.Point(401, 306);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(140, 26);
-            this.textBox1.TabIndex = 21;
+            this.textBoxTimKiem.Location = new System.Drawing.Point(177, 304);
+            this.textBoxTimKiem.Name = "textBoxTimKiem";
+            this.textBoxTimKiem.Size = new System.Drawing.Size(140, 26);
+            this.textBoxTimKiem.TabIndex = 21;
             // 
-            // buttonTimKiem
+            // label8
             // 
-            this.buttonTimKiem.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.buttonTimKiem.Location = new System.Drawing.Point(561, 303);
-            this.buttonTimKiem.Name = "buttonTimKiem";
-            this.buttonTimKiem.Size = new System.Drawing.Size(106, 32);
-            this.buttonTimKiem.TabIndex = 22;
-            this.buttonTimKiem.Text = "Tìm Kiếm";
-            this.buttonTimKiem.UseVisualStyleBackColor = true;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label8.Location = new System.Drawing.Point(52, 304);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(123, 26);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "Tìm Kiếm:";
             // 
             // FormNhanVien
             // 
@@ -324,8 +324,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 642);
             this.ControlBox = false;
-            this.Controls.Add(this.buttonTimKiem);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.textBoxTimKiem);
             this.Controls.Add(this.dateTimePickerNgaySinh);
             this.Controls.Add(this.buttonThoat);
             this.Controls.Add(this.buttonXoa);
@@ -346,7 +346,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormNhanVien";
-            this.Text = "FormNhanVien";
             this.Load += new System.EventHandler(this.FormNhanVien_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNhanVien)).EndInit();
             this.ResumeLayout(false);
@@ -381,7 +380,7 @@
         private System.Windows.Forms.Button buttonXoa;
         private System.Windows.Forms.Button buttonThoat;
         private System.Windows.Forms.DateTimePicker dateTimePickerNgaySinh;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button buttonTimKiem;
+        private System.Windows.Forms.TextBox textBoxTimKiem;
+        private System.Windows.Forms.Label label8;
     }
 }

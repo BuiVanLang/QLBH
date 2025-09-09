@@ -8,6 +8,9 @@ namespace QuanLyBanHang
     public partial class FormNhanVien : Form
     {
         private readonly string Nguon = @"Data Source=BuiVanLang;Initial Catalog=QLBH3;Integrated Security=True";
+        private DataTable dtNhanVien; // giữ lại dữ liệu gốc
+
+
 
         public FormNhanVien()
         {
@@ -28,6 +31,9 @@ namespace QuanLyBanHang
             buttonSua.Click += ButtonSua_Click;
             buttonXoa.Click += ButtonXoa_Click;
             buttonThoat.Click += ButtonThoat_Click;
+            textBoxTimKiem.TextChanged += textBoxTimKiem_TextChanged;
+
+
         }
 
         private void FormNhanVien_Load(object sender, EventArgs e)
@@ -46,9 +52,10 @@ namespace QuanLyBanHang
                     string sql = "SELECT * FROM NhanVien1";
                     using (SqlDataAdapter adapter = new SqlDataAdapter(sql, conn))
                     {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-                        dataGridViewNhanVien.DataSource = dt;
+                        dtNhanVien = new DataTable();
+                        adapter.Fill(dtNhanVien);
+                        dataGridViewNhanVien.DataSource = dtNhanVien;
+
                         dataGridViewNhanVien.AutoGenerateColumns = false;
 
                     }
@@ -60,6 +67,10 @@ namespace QuanLyBanHang
                 MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
                
             }
+        }
+        private void textBoxTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            TimKiemNhanVien();
         }
 
         private void ResetForm()
@@ -193,6 +204,27 @@ namespace QuanLyBanHang
             this.Close();
         }
 
+        private void TimKiemNhanVien()
+        {
+            if (dtNhanVien == null) return;
+
+            string tuKhoa = textBoxTimKiem.Text.Trim().Replace("'", "''");
+
+            if (string.IsNullOrEmpty(tuKhoa))
+            {
+                dataGridViewNhanVien.DataSource = dtNhanVien; // hiển thị lại toàn bộ
+            }
+            else
+            {
+                DataView dv = new DataView(dtNhanVien);
+                dv.RowFilter = $"Ten LIKE '%{tuKhoa}%' OR SoDienThoai LIKE '%{tuKhoa}%'";
+                dataGridViewNhanVien.DataSource = dv;
+            }
+        }
+
+
+
+
         private void label1_Click(object sender, EventArgs e)
         {
             // Để trống hoặc thêm code nếu cần
@@ -201,6 +233,6 @@ namespace QuanLyBanHang
         {
             // Để trống hoặc viết xử lý nếu cần
         }
-
+      
     }
 }
