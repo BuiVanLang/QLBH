@@ -8,7 +8,7 @@ namespace QuanLyBanHang
     public partial class FormHangHoa : Form
     {
         private readonly string Nguon = @"Data Source=BuiVanLang;Initial Catalog=QLBH3;Integrated Security=True";
-
+        private DataTable dtHangHoa;
         public FormHangHoa()
         {
             InitializeComponent();
@@ -18,6 +18,12 @@ namespace QuanLyBanHang
             buttonThoat.Click += buttonThoat_Click;
             dataGridViewHangHoa.CellClick += dataGridViewHangHoa_CellClick;
             this.Load += FormHangHoa_Load;
+            textBoxTimKiem.TextChanged += textBoxTimKiem_TextChanged;
+
+        }
+        private void textBoxTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            TimKiemHangHoa();
         }
 
         // ================== FORM LOAD ==================
@@ -54,10 +60,10 @@ namespace QuanLyBanHang
                                INNER JOIN ChatLieu C ON H.ID_ChatLieu = C.ID
                                ORDER BY H.ID";
                 SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
+                dtHangHoa = new DataTable();
+                da.Fill(dtHangHoa);
+                dataGridViewHangHoa.DataSource = dtHangHoa;
 
-                dataGridViewHangHoa.DataSource = dt;
             }
         }
 
@@ -212,5 +218,23 @@ namespace QuanLyBanHang
                 this.Close();
             }
         }
+        private void TimKiemHangHoa()
+        {
+            if (dtHangHoa == null) return;
+
+            string tuKhoa = textBoxTimKiem.Text.Trim().Replace("'", "''");
+
+            if (string.IsNullOrEmpty(tuKhoa))
+            {
+                dataGridViewHangHoa.DataSource = dtHangHoa; // hiển thị lại toàn bộ
+            }
+            else
+            {
+                DataView dv = new DataView(dtHangHoa);
+                dv.RowFilter = $"TenHang LIKE '%{tuKhoa}%' ";
+                dataGridViewHangHoa.DataSource = dv;
+            }
+        }
+
     }
 }

@@ -38,6 +38,8 @@
             this.buttonSua = new System.Windows.Forms.Button();
             this.buttonXoa = new System.Windows.Forms.Button();
             this.buttonThoat = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxTimKiem = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChatLieu)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +47,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label1.Location = new System.Drawing.Point(467, 88);
+            this.label1.Location = new System.Drawing.Point(445, 47);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(307, 36);
@@ -56,7 +58,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label2.Location = new System.Drawing.Point(255, 188);
+            this.label2.Location = new System.Drawing.Point(82, 141);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(164, 26);
@@ -67,7 +69,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label3.Location = new System.Drawing.Point(255, 269);
+            this.label3.Location = new System.Drawing.Point(82, 212);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(168, 26);
@@ -79,7 +81,7 @@
             this.dataGridViewChatLieu.AllowUserToAddRows = false;
             this.dataGridViewChatLieu.AllowUserToDeleteRows = false;
             this.dataGridViewChatLieu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewChatLieu.Location = new System.Drawing.Point(193, 401);
+            this.dataGridViewChatLieu.Location = new System.Drawing.Point(170, 410);
             this.dataGridViewChatLieu.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewChatLieu.Name = "dataGridViewChatLieu";
             this.dataGridViewChatLieu.ReadOnly = true;
@@ -90,26 +92,26 @@
             // 
             // textBoxMaChatLieu
             // 
-            this.textBoxMaChatLieu.Location = new System.Drawing.Point(451, 185);
+            this.textBoxMaChatLieu.Location = new System.Drawing.Point(272, 141);
             this.textBoxMaChatLieu.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxMaChatLieu.Name = "textBoxMaChatLieu";
-            this.textBoxMaChatLieu.Size = new System.Drawing.Size(306, 35);
+            this.textBoxMaChatLieu.Size = new System.Drawing.Size(228, 35);
             this.textBoxMaChatLieu.TabIndex = 4;
             // 
             // textBoxTenChatLieu
             // 
-            this.textBoxTenChatLieu.Location = new System.Drawing.Point(451, 269);
+            this.textBoxTenChatLieu.Location = new System.Drawing.Point(272, 212);
             this.textBoxTenChatLieu.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxTenChatLieu.Name = "textBoxTenChatLieu";
-            this.textBoxTenChatLieu.Size = new System.Drawing.Size(306, 35);
+            this.textBoxTenChatLieu.Size = new System.Drawing.Size(228, 35);
             this.textBoxTenChatLieu.TabIndex = 5;
             // 
             // buttonThem
             // 
             this.buttonThem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.buttonThem.Location = new System.Drawing.Point(243, 336);
+            this.buttonThem.Location = new System.Drawing.Point(638, 104);
             this.buttonThem.Name = "buttonThem";
-            this.buttonThem.Size = new System.Drawing.Size(93, 45);
+            this.buttonThem.Size = new System.Drawing.Size(87, 48);
             this.buttonThem.TabIndex = 6;
             this.buttonThem.Text = "Thêm";
             this.buttonThem.UseVisualStyleBackColor = true;
@@ -118,7 +120,7 @@
             // buttonSua
             // 
             this.buttonSua.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.buttonSua.Location = new System.Drawing.Point(413, 336);
+            this.buttonSua.Location = new System.Drawing.Point(638, 184);
             this.buttonSua.Name = "buttonSua";
             this.buttonSua.Size = new System.Drawing.Size(87, 45);
             this.buttonSua.TabIndex = 7;
@@ -128,9 +130,9 @@
             // buttonXoa
             // 
             this.buttonXoa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.buttonXoa.Location = new System.Drawing.Point(583, 336);
+            this.buttonXoa.Location = new System.Drawing.Point(638, 267);
             this.buttonXoa.Name = "buttonXoa";
-            this.buttonXoa.Size = new System.Drawing.Size(91, 45);
+            this.buttonXoa.Size = new System.Drawing.Size(87, 50);
             this.buttonXoa.TabIndex = 8;
             this.buttonXoa.Text = "Xóa";
             this.buttonXoa.UseVisualStyleBackColor = true;
@@ -138,19 +140,40 @@
             // buttonThoat
             // 
             this.buttonThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.buttonThoat.Location = new System.Drawing.Point(767, 336);
+            this.buttonThoat.Location = new System.Drawing.Point(638, 349);
             this.buttonThoat.Name = "buttonThoat";
             this.buttonThoat.Size = new System.Drawing.Size(90, 45);
             this.buttonThoat.TabIndex = 9;
             this.buttonThoat.Text = "Thoát";
             this.buttonThoat.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label4.Location = new System.Drawing.Point(761, 115);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(123, 26);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Tìm Kiếm:";
+            // 
+            // textBoxTimKiem
+            // 
+            this.textBoxTimKiem.Location = new System.Drawing.Point(892, 112);
+            this.textBoxTimKiem.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxTimKiem.Name = "textBoxTimKiem";
+            this.textBoxTimKiem.Size = new System.Drawing.Size(187, 35);
+            this.textBoxTimKiem.TabIndex = 11;
+            // 
             // FormChatLieu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1156, 608);
+            this.ClientSize = new System.Drawing.Size(1156, 632);
             this.ControlBox = false;
+            this.Controls.Add(this.textBoxTimKiem);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.buttonThoat);
             this.Controls.Add(this.buttonXoa);
             this.Controls.Add(this.buttonSua);
@@ -183,5 +206,7 @@
         private System.Windows.Forms.Button buttonSua;
         private System.Windows.Forms.Button buttonXoa;
         private System.Windows.Forms.Button buttonThoat;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxTimKiem;
     }
 }

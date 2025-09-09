@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -52,7 +53,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label1.Location = new System.Drawing.Point(532, 22);
+            this.label1.Location = new System.Drawing.Point(503, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(265, 36);
             this.label1.TabIndex = 0;
@@ -62,7 +63,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label2.Location = new System.Drawing.Point(89, 234);
+            this.label2.Location = new System.Drawing.Point(233, 151);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(205, 32);
             this.label2.TabIndex = 1;
@@ -72,7 +73,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label3.Location = new System.Drawing.Point(850, 234);
+            this.label3.Location = new System.Drawing.Point(233, 278);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(148, 32);
             this.label3.TabIndex = 2;
@@ -82,7 +83,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label4.Location = new System.Drawing.Point(740, 137);
+            this.label4.Location = new System.Drawing.Point(233, 219);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(269, 32);
             this.label4.TabIndex = 3;
@@ -90,7 +91,7 @@
             // 
             // textBoxTenTaiKhoan
             // 
-            this.textBoxTenTaiKhoan.Location = new System.Drawing.Point(331, 229);
+            this.textBoxTenTaiKhoan.Location = new System.Drawing.Point(509, 159);
             this.textBoxTenTaiKhoan.Multiline = true;
             this.textBoxTenTaiKhoan.Name = "textBoxTenTaiKhoan";
             this.textBoxTenTaiKhoan.Size = new System.Drawing.Size(272, 35);
@@ -98,7 +99,7 @@
             // 
             // textBoxMatKhau
             // 
-            this.textBoxMatKhau.Location = new System.Drawing.Point(1015, 227);
+            this.textBoxMatKhau.Location = new System.Drawing.Point(509, 278);
             this.textBoxMatKhau.Multiline = true;
             this.textBoxMatKhau.Name = "textBoxMatKhau";
             this.textBoxMatKhau.Size = new System.Drawing.Size(272, 37);
@@ -106,18 +107,18 @@
             // 
             // textBoxNhapLaiMatKhau
             // 
-            this.textBoxNhapLaiMatKhau.Location = new System.Drawing.Point(1015, 132);
+            this.textBoxNhapLaiMatKhau.Location = new System.Drawing.Point(509, 219);
             this.textBoxNhapLaiMatKhau.Multiline = true;
             this.textBoxNhapLaiMatKhau.Name = "textBoxNhapLaiMatKhau";
-            this.textBoxNhapLaiMatKhau.Size = new System.Drawing.Size(266, 40);
+            this.textBoxNhapLaiMatKhau.Size = new System.Drawing.Size(272, 40);
             this.textBoxNhapLaiMatKhau.TabIndex = 6;
             // 
             // buttonDangky
             // 
             this.buttonDangky.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.buttonDangky.Location = new System.Drawing.Point(283, 321);
+            this.buttonDangky.Location = new System.Drawing.Point(865, 96);
             this.buttonDangky.Name = "buttonDangky";
-            this.buttonDangky.Size = new System.Drawing.Size(127, 38);
+            this.buttonDangky.Size = new System.Drawing.Size(127, 49);
             this.buttonDangky.TabIndex = 7;
             this.buttonDangky.Text = "Đăng ký";
             this.buttonDangky.UseVisualStyleBackColor = true;
@@ -125,9 +126,9 @@
             // buttonXoa
             // 
             this.buttonXoa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.buttonXoa.Location = new System.Drawing.Point(524, 321);
+            this.buttonXoa.Location = new System.Drawing.Point(865, 269);
             this.buttonXoa.Name = "buttonXoa";
-            this.buttonXoa.Size = new System.Drawing.Size(120, 39);
+            this.buttonXoa.Size = new System.Drawing.Size(127, 46);
             this.buttonXoa.TabIndex = 8;
             this.buttonXoa.Text = "Xóa";
             this.buttonXoa.UseVisualStyleBackColor = true;
@@ -135,9 +136,9 @@
             // buttonSua
             // 
             this.buttonSua.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.buttonSua.Location = new System.Drawing.Point(746, 321);
+            this.buttonSua.Location = new System.Drawing.Point(865, 179);
             this.buttonSua.Name = "buttonSua";
-            this.buttonSua.Size = new System.Drawing.Size(113, 38);
+            this.buttonSua.Size = new System.Drawing.Size(127, 48);
             this.buttonSua.TabIndex = 9;
             this.buttonSua.Text = "Sửa";
             this.buttonSua.UseVisualStyleBackColor = true;
@@ -145,7 +146,7 @@
             // buttonThoat
             // 
             this.buttonThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.buttonThoat.Location = new System.Drawing.Point(968, 319);
+            this.buttonThoat.Location = new System.Drawing.Point(1057, 100);
             this.buttonThoat.Name = "buttonThoat";
             this.buttonThoat.Size = new System.Drawing.Size(112, 40);
             this.buttonThoat.TabIndex = 10;
@@ -156,12 +157,20 @@
             // 
             this.dataGridViewDangKy.AllowUserToAddRows = false;
             this.dataGridViewDangKy.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewDangKy.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewDangKy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDangKy.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.TenTaiKhoan,
             this.MatKhau});
-            this.dataGridViewDangKy.Location = new System.Drawing.Point(239, 383);
+            this.dataGridViewDangKy.Location = new System.Drawing.Point(290, 371);
             this.dataGridViewDangKy.Name = "dataGridViewDangKy";
             this.dataGridViewDangKy.ReadOnly = true;
             this.dataGridViewDangKy.RowHeadersWidth = 62;
@@ -176,7 +185,7 @@
             this.ID.MinimumWidth = 8;
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
-            this.ID.Width = 61;
+            this.ID.Width = 73;
             // 
             // TenTaiKhoan
             // 
@@ -185,7 +194,7 @@
             this.TenTaiKhoan.MinimumWidth = 8;
             this.TenTaiKhoan.Name = "TenTaiKhoan";
             this.TenTaiKhoan.ReadOnly = true;
-            this.TenTaiKhoan.Width = 136;
+            this.TenTaiKhoan.Width = 192;
             // 
             // MatKhau
             // 
@@ -199,7 +208,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label5.Location = new System.Drawing.Point(241, 142);
+            this.label5.Location = new System.Drawing.Point(233, 94);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 32);
             this.label5.TabIndex = 12;
@@ -207,7 +216,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(331, 137);
+            this.textBox1.Location = new System.Drawing.Point(509, 96);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(272, 40);

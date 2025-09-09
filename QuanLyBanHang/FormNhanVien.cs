@@ -233,6 +233,10 @@ namespace QuanLyBanHang
         {
             // Để trống hoặc viết xử lý nếu cần
         }
-      
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

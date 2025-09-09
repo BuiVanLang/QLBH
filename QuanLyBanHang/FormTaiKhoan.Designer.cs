@@ -81,18 +81,19 @@
             // textBoxMatKhau
             // 
             this.textBoxMatKhau.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.textBoxMatKhau.Location = new System.Drawing.Point(291, 225);
+            this.textBoxMatKhau.Location = new System.Drawing.Point(291, 220);
             this.textBoxMatKhau.Name = "textBoxMatKhau";
-            this.textBoxMatKhau.PasswordChar = '*';
             this.textBoxMatKhau.Size = new System.Drawing.Size(272, 35);
             this.textBoxMatKhau.TabIndex = 4;
+            this.textBoxMatKhau.UseSystemPasswordChar = true;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.checkBox1.Location = new System.Drawing.Point(199, 295);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(159, 24);
+            this.checkBox1.Size = new System.Drawing.Size(140, 23);
             this.checkBox1.TabIndex = 5;
             this.checkBox1.Text = "Hiển thị mật khẩu";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -109,7 +110,7 @@
             // 
             // buttonDangNhap
             // 
-            this.buttonDangNhap.Location = new System.Drawing.Point(152, 358);
+            this.buttonDangNhap.Location = new System.Drawing.Point(156, 356);
             this.buttonDangNhap.Name = "buttonDangNhap";
             this.buttonDangNhap.Size = new System.Drawing.Size(107, 39);
             this.buttonDangNhap.TabIndex = 7;
@@ -127,7 +128,7 @@
             // 
             // buttonThoat
             // 
-            this.buttonThoat.Location = new System.Drawing.Point(478, 356);
+            this.buttonThoat.Location = new System.Drawing.Point(493, 354);
             this.buttonThoat.Name = "buttonThoat";
             this.buttonThoat.Size = new System.Drawing.Size(112, 41);
             this.buttonThoat.TabIndex = 9;

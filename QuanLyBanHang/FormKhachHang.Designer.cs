@@ -53,6 +53,8 @@
             this.NgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBoxTimKiem = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewKhachHang)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,7 +73,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label2.Location = new System.Drawing.Point(146, 132);
+            this.label2.Location = new System.Drawing.Point(63, 87);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 26);
@@ -82,7 +84,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label3.Location = new System.Drawing.Point(146, 205);
+            this.label3.Location = new System.Drawing.Point(63, 152);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(103, 26);
@@ -93,7 +95,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label4.Location = new System.Drawing.Point(146, 296);
+            this.label4.Location = new System.Drawing.Point(63, 211);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(119, 26);
@@ -104,7 +106,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label5.Location = new System.Drawing.Point(607, 132);
+            this.label5.Location = new System.Drawing.Point(63, 268);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(125, 26);
@@ -115,7 +117,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label6.Location = new System.Drawing.Point(607, 205);
+            this.label6.Location = new System.Drawing.Point(63, 326);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(99, 26);
@@ -126,7 +128,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label7.Location = new System.Drawing.Point(607, 296);
+            this.label7.Location = new System.Drawing.Point(63, 380);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(164, 26);
@@ -135,28 +137,28 @@
             // 
             // textBoxMaKH
             // 
-            this.textBoxMaKH.Location = new System.Drawing.Point(273, 131);
+            this.textBoxMaKH.Location = new System.Drawing.Point(236, 84);
             this.textBoxMaKH.Name = "textBoxMaKH";
             this.textBoxMaKH.Size = new System.Drawing.Size(218, 35);
             this.textBoxMaKH.TabIndex = 7;
             // 
             // textBoxTenKH
             // 
-            this.textBoxTenKH.Location = new System.Drawing.Point(273, 202);
+            this.textBoxTenKH.Location = new System.Drawing.Point(236, 152);
             this.textBoxTenKH.Name = "textBoxTenKH";
             this.textBoxTenKH.Size = new System.Drawing.Size(218, 35);
             this.textBoxTenKH.TabIndex = 8;
             // 
             // textBoxDiaChi
             // 
-            this.textBoxDiaChi.Location = new System.Drawing.Point(800, 202);
+            this.textBoxDiaChi.Location = new System.Drawing.Point(236, 326);
             this.textBoxDiaChi.Name = "textBoxDiaChi";
             this.textBoxDiaChi.Size = new System.Drawing.Size(211, 35);
             this.textBoxDiaChi.TabIndex = 11;
             // 
             // textBoxSoDienThoai
             // 
-            this.textBoxSoDienThoai.Location = new System.Drawing.Point(800, 287);
+            this.textBoxSoDienThoai.Location = new System.Drawing.Point(236, 380);
             this.textBoxSoDienThoai.Name = "textBoxSoDienThoai";
             this.textBoxSoDienThoai.Size = new System.Drawing.Size(211, 35);
             this.textBoxSoDienThoai.TabIndex = 12;
@@ -164,7 +166,7 @@
             // radioButtonNam
             // 
             this.radioButtonNam.AutoSize = true;
-            this.radioButtonNam.Location = new System.Drawing.Point(289, 297);
+            this.radioButtonNam.Location = new System.Drawing.Point(236, 211);
             this.radioButtonNam.Name = "radioButtonNam";
             this.radioButtonNam.Size = new System.Drawing.Size(83, 31);
             this.radioButtonNam.TabIndex = 13;
@@ -175,7 +177,7 @@
             // radioButtonNu
             // 
             this.radioButtonNu.AutoSize = true;
-            this.radioButtonNu.Location = new System.Drawing.Point(424, 297);
+            this.radioButtonNu.Location = new System.Drawing.Point(349, 211);
             this.radioButtonNu.Name = "radioButtonNu";
             this.radioButtonNu.Size = new System.Drawing.Size(67, 31);
             this.radioButtonNu.TabIndex = 14;
@@ -186,7 +188,7 @@
             // buttonThem
             // 
             this.buttonThem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.buttonThem.Location = new System.Drawing.Point(250, 372);
+            this.buttonThem.Location = new System.Drawing.Point(658, 101);
             this.buttonThem.Name = "buttonThem";
             this.buttonThem.Size = new System.Drawing.Size(86, 43);
             this.buttonThem.TabIndex = 15;
@@ -196,7 +198,7 @@
             // buttonSua
             // 
             this.buttonSua.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.buttonSua.Location = new System.Drawing.Point(433, 372);
+            this.buttonSua.Location = new System.Drawing.Point(661, 185);
             this.buttonSua.Name = "buttonSua";
             this.buttonSua.Size = new System.Drawing.Size(83, 43);
             this.buttonSua.TabIndex = 16;
@@ -206,7 +208,7 @@
             // buttonXoa
             // 
             this.buttonXoa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.buttonXoa.Location = new System.Drawing.Point(631, 372);
+            this.buttonXoa.Location = new System.Drawing.Point(661, 281);
             this.buttonXoa.Name = "buttonXoa";
             this.buttonXoa.Size = new System.Drawing.Size(88, 43);
             this.buttonXoa.TabIndex = 17;
@@ -216,7 +218,7 @@
             // buttonThoat
             // 
             this.buttonThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.buttonThoat.Location = new System.Drawing.Point(811, 372);
+            this.buttonThoat.Location = new System.Drawing.Point(663, 372);
             this.buttonThoat.Name = "buttonThoat";
             this.buttonThoat.Size = new System.Drawing.Size(86, 43);
             this.buttonThoat.TabIndex = 18;
@@ -226,7 +228,7 @@
             // 
             // dateTimePickerNgaySinh
             // 
-            this.dateTimePickerNgaySinh.Location = new System.Drawing.Point(739, 131);
+            this.dateTimePickerNgaySinh.Location = new System.Drawing.Point(236, 268);
             this.dateTimePickerNgaySinh.Name = "dateTimePickerNgaySinh";
             this.dateTimePickerNgaySinh.Size = new System.Drawing.Size(309, 35);
             this.dateTimePickerNgaySinh.TabIndex = 19;
@@ -305,12 +307,32 @@
             this.SDT.ReadOnly = true;
             this.SDT.Width = 185;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label8.Location = new System.Drawing.Point(784, 109);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(123, 26);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "Tìm Kiếm:";
+            // 
+            // textBoxTimKiem
+            // 
+            this.textBoxTimKiem.Location = new System.Drawing.Point(914, 106);
+            this.textBoxTimKiem.Name = "textBoxTimKiem";
+            this.textBoxTimKiem.Size = new System.Drawing.Size(193, 35);
+            this.textBoxTimKiem.TabIndex = 22;
+            // 
             // FormKhachHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1156, 608);
             this.ControlBox = false;
+            this.Controls.Add(this.textBoxTimKiem);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.dataGridViewKhachHang);
             this.Controls.Add(this.dateTimePickerNgaySinh);
             this.Controls.Add(this.buttonThoat);
@@ -367,5 +389,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NgaySinh;
         private System.Windows.Forms.DataGridViewTextBoxColumn DiaChi;
         private System.Windows.Forms.DataGridViewTextBoxColumn SDT;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textBoxTimKiem;
     }
 }

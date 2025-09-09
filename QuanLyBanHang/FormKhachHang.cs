@@ -13,7 +13,9 @@ namespace QuanLyBanHang
     public partial class FormKhachHang : Form
     {
         private readonly string Nguon = @"Data Source=BuiVanLang;Initial Catalog=QLBH3;Integrated Security=True";
-        
+
+        private DataTable dtKhachHang; // Lưu dữ liệu khách hàng để tìm kiếm
+
         public FormKhachHang()
         {
             InitializeComponent();
@@ -23,6 +25,11 @@ namespace QuanLyBanHang
             buttonThoat.Click += buttonThoat_Click;
             dataGridViewKhachHang.CellClick += DataGridViewKhachHang_CellClick;
             this.Load += FormKhachHang_Load;
+            textBoxTimKiem.TextChanged += textBoxTimKiem_TextChanged;
+        }
+        private void textBoxTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            TimKiemKhachHang();
         }
 
         private void FormKhachHang_Load(object sender, EventArgs e)
@@ -42,8 +49,10 @@ namespace QuanLyBanHang
                     string sql = "SELECT ID, Ten, GioiTinh, NgaySinh, DiaChi, SDT FROM KhachHang";
                     using (SqlDataAdapter adapter = new SqlDataAdapter(sql, conn))
                     {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
+                        dtKhachHang = new DataTable();
+                        adapter.Fill(dtKhachHang);
+                        dataGridViewKhachHang.DataSource = dtKhachHang;
+
                         dataGridViewKhachHang.AutoGenerateColumns = false; // QUAN TRỌNG!
 dataGridViewKhachHang.Columns.Clear();
 dataGridViewKhachHang.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Mã KH", DataPropertyName = "ID", Name = "ID" });
@@ -52,7 +61,7 @@ dataGridViewKhachHang.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "
 dataGridViewKhachHang.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Ngày Sinh", DataPropertyName = "NgaySinh", Name = "NgaySinh" });
 dataGridViewKhachHang.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Địa Chỉ", DataPropertyName = "DiaChi", Name = "DiaChi" });
 dataGridViewKhachHang.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Số Điện Thoại", DataPropertyName = "SDT", Name = "SDT" });
-                        dataGridViewKhachHang.DataSource = dt;
+                       
                     }
                 }
             }
@@ -207,5 +216,23 @@ dataGridViewKhachHang.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "
         {
             this.Close();
         }
+        private void TimKiemKhachHang()
+        {
+            if (dtKhachHang == null) return;
+
+            string tuKhoa = textBoxTimKiem.Text.Trim().Replace("'", "''");
+
+            if (string.IsNullOrEmpty(tuKhoa))
+            {
+                dataGridViewKhachHang.DataSource = dtKhachHang; // hiển thị lại toàn bộ
+            }
+            else
+            {
+                DataView dv = new DataView(dtKhachHang);
+                dv.RowFilter = $"Ten LIKE '%{tuKhoa}%' OR SDT LIKE '%{tuKhoa}%'";
+                dataGridViewKhachHang.DataSource = dv;
+            }
+        }
+
     }
 }

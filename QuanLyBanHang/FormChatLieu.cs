@@ -8,7 +8,7 @@ namespace QuanLyBanHang
     public partial class FormChatLieu : Form
     {
         private readonly string Nguon = @"Data Source=BuiVanLang;Initial Catalog=QLBH3;Integrated Security=True";
-
+        private DataTable dtChatLieu;
         public FormChatLieu()
         {
             InitializeComponent();
@@ -18,6 +18,11 @@ namespace QuanLyBanHang
             buttonThoat.Click += ButtonThoat_Click;
             dataGridViewChatLieu.CellClick += DataGridViewChatLieu_CellClick;
             this.Load += FormChatLieu_Load;
+            textBoxTimKiem.TextChanged += textBoxTimKiem_TextChanged;
+        }
+        private void textBoxTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            TimKiemChatLieu();
         }
 
         private void FormChatLieu_Load(object sender, EventArgs e)
@@ -34,9 +39,9 @@ namespace QuanLyBanHang
                 string sql = "SELECT ID, TenChatLieu FROM ChatLieu ORDER BY ID";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(sql, conn))
                 {
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
-                    dataGridViewChatLieu.DataSource = dt;
+                    dtChatLieu = new DataTable();
+                    adapter.Fill(dtChatLieu);
+                    dataGridViewChatLieu.DataSource = dtChatLieu;
                 }
             }
         }
@@ -145,5 +150,23 @@ namespace QuanLyBanHang
                 this.Close();
             }
         }
+        private void TimKiemChatLieu()
+        {
+            if (dtChatLieu == null) return;
+
+            string tuKhoa = textBoxTimKiem.Text.Trim().Replace("'", "''");
+
+            if (string.IsNullOrEmpty(tuKhoa))
+            {
+                dataGridViewChatLieu.DataSource = dtChatLieu; // hiển thị lại toàn bộ
+            }
+            else
+            {
+                DataView dv = new DataView(dtChatLieu);
+                dv.RowFilter = $"TenChatLieu LIKE '%{tuKhoa}%' ";
+                dataGridViewChatLieu.DataSource = dv;
+            }
+        }
+
     }
 }
