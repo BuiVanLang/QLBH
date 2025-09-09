@@ -183,7 +183,7 @@
             this.ID.MinimumWidth = 8;
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
-            this.ID.Width = 125;
+            this.ID.Width = 117;
             // 
             // ID_ChiTietHoaDon
             // 
@@ -192,7 +192,7 @@
             this.ID_ChiTietHoaDon.MinimumWidth = 8;
             this.ID_ChiTietHoaDon.Name = "ID_ChiTietHoaDon";
             this.ID_ChiTietHoaDon.ReadOnly = true;
-            this.ID_ChiTietHoaDon.Width = 149;
+            this.ID_ChiTietHoaDon.Width = 139;
             // 
             // ID_NhanVien
             // 
@@ -201,7 +201,7 @@
             this.ID_NhanVien.MinimumWidth = 8;
             this.ID_NhanVien.Name = "ID_NhanVien";
             this.ID_NhanVien.ReadOnly = true;
-            this.ID_NhanVien.Width = 134;
+            this.ID_NhanVien.Width = 124;
             // 
             // ID_KhachHang
             // 
@@ -210,7 +210,7 @@
             this.ID_KhachHang.MinimumWidth = 8;
             this.ID_KhachHang.Name = "ID_KhachHang";
             this.ID_KhachHang.ReadOnly = true;
-            this.ID_KhachHang.Width = 146;
+            this.ID_KhachHang.Width = 135;
             // 
             // comboBoxMaChiTietHoaDon
             // 
@@ -244,6 +244,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1126, 629);
+            this.ControlBox = false;
             this.Controls.Add(this.comboBoxMaNhanVien);
             this.Controls.Add(this.comboBoxMaKhachHang);
             this.Controls.Add(this.comboBoxMaChiTietHoaDon);

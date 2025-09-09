@@ -196,6 +196,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 686);
+            this.ControlBox = false;
             this.Controls.Add(this.dataGridViewChiTietHoaDon);
             this.Controls.Add(this.buttonThoat);
             this.Controls.Add(this.buttonXoa);

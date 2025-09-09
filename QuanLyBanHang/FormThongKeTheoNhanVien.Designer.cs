@@ -81,7 +81,7 @@
             // buttonXuatExcel
             // 
             this.buttonXuatExcel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.buttonXuatExcel.Location = new System.Drawing.Point(633, 480);
+            this.buttonXuatExcel.Location = new System.Drawing.Point(602, 481);
             this.buttonXuatExcel.Name = "buttonXuatExcel";
             this.buttonXuatExcel.Size = new System.Drawing.Size(116, 42);
             this.buttonXuatExcel.TabIndex = 5;
@@ -104,6 +104,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(899, 563);
+            this.ControlBox = false;
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonXuatExcel);
             this.Controls.Add(this.dataGridView1);

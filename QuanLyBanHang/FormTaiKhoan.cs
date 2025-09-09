@@ -10,7 +10,7 @@ namespace QuanLyBanHang
         {
             InitializeComponent();
 
-            // Gắn sự kiện cho các nút
+            // Gắn sự kiện
             buttonDangNhap.Click += buttonDangNhap_Click;
             buttonDangKy.Click += buttonDangKy_Click;
             buttonThoat.Click += buttonThoat_Click;
@@ -21,7 +21,8 @@ namespace QuanLyBanHang
             textBoxMatKhau.UseSystemPasswordChar = true;
         }
 
-        String Nguon = @"Data Source=BuiVanLang;Initial Catalog=QLBH3;Integrated Security=True";
+        // Chuỗi kết nối SQL (chỉnh sửa theo CSDL của bạn)
+        private string Nguon = @"Data Source=BuiVanLang;Initial Catalog=QLBH3;Integrated Security=True";
 
         // ===== Nút Đăng nhập =====
         private void buttonDangNhap_Click(object sender, EventArgs e)
@@ -47,14 +48,15 @@ namespace QuanLyBanHang
                         cmd.Parameters.AddWithValue("@TenTaiKhoan", tenTK);
                         cmd.Parameters.AddWithValue("@MatKhau", matKhau);
                         int count = (int)cmd.ExecuteScalar();
+
                         if (count > 0)
                         {
                             MessageBox.Show("Đăng nhập thành công!",
                                             "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            // Sau khi đăng nhập thành công có thể mở form chính
-                            // FormMain frm = new FormMain();
-                            // frm.Show();
-                            // this.Hide();
+
+                            // Đặt DialogResult = OK để Program.cs biết login thành công
+                            this.DialogResult = DialogResult.OK;
+                            this.Close(); // Đóng form đăng nhập
                         }
                         else
                         {
@@ -82,32 +84,25 @@ namespace QuanLyBanHang
         // ===== Nút Đăng ký =====
         private void buttonDangKy_Click(object sender, EventArgs e)
         {
-            // Mở form đăng ký
             FormDangKy formDangKy = new FormDangKy();
             formDangKy.ShowDialog();
         }
 
         // ===== Nút Thoát =====
-       // ===== Nút Thoát =====
-private void buttonThoat_Click(object sender, EventArgs e)
-{
-    DialogResult result = MessageBox.Show("Bạn có chắc muốn đóng form này không?",
-                                          "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-    if (result == DialogResult.Yes)
-    {
-        this.Close(); // Chỉ đóng form hiện tại, không thoát toàn bộ ứng dụng
-    }
-}
+        private void buttonThoat_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có chắc muốn thoát không?",
+                                                  "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit(); // Thoát toàn bộ ứng dụng
+            }
+        }
 
         // ===== Checkbox hiện/ẩn mật khẩu =====
         private void checkBoxHienThiMatKhau_CheckedChanged(object sender, EventArgs e)
         {
             textBoxMatKhau.UseSystemPasswordChar = !checkBox1.Checked;
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-            // Không cần xử lý gì ở đây
         }
     }
 }

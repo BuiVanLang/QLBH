@@ -1,30 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyBanHang
 {
     internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form11());
-            FormTaiKhoan dn = new FormTaiKhoan();
-            if( dn.ShowDialog() == DialogResult.OK)
+
+            // Chỉ mở FormTaiKhoan để lấy kết quả đăng nhập
+            using (FormTaiKhoan dn = new FormTaiKhoan())
             {
-                Application.Run(new FormTaiKhoan ());
-            }
-            else
-            {
-                return;
+                if (dn.ShowDialog() == DialogResult.OK)
+                {
+                    // Nếu đăng nhập thành công thì chạy form chính
+                    Application.Run(new Form11());
+                }
+                else
+                {
+                    // Nếu đăng nhập thất bại hoặc bấm thoát
+                    Application.Exit();
+                }
             }
         }
     }

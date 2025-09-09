@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using Excel = Microsoft.Office.Interop.Excel;
+//using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 
 namespace QuanLyBanHang
@@ -181,7 +181,7 @@ namespace QuanLyBanHang
 
         private void ExportDataToExcel(string filePath)
         {
-            Excel.Application excelApp = null;
+           /* Excel.Application excelApp = null;
             Excel._Workbook workbook = null;
             Excel._Worksheet worksheet = null;
 
@@ -241,10 +241,10 @@ namespace QuanLyBanHang
             worksheet.Cells[3, 1] = $"Tìm kiếm theo: {(string.IsNullOrEmpty(textBoxTenNV.Text) ? "Tất cả nhân viên" : textBoxTenNV.Text)}";
 
             // Dòng trống
-            worksheet.Cells[4, 1] = "";
+            worksheet.Cells[4, 1] = "";*/
         }
 
-        private void CreateTableHeader(Excel._Worksheet worksheet)
+       /* private void CreateTableHeader(Excel._Worksheet worksheet)
         {
             const int headerRow = 5;
 
@@ -445,6 +445,6 @@ namespace QuanLyBanHang
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
             }
-        }
+        }*/
     }
 }

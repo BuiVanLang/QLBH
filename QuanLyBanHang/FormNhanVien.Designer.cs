@@ -323,6 +323,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 642);
+            this.ControlBox = false;
             this.Controls.Add(this.buttonTimKiem);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dateTimePickerNgaySinh);

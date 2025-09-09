@@ -310,6 +310,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1156, 608);
+            this.ControlBox = false;
             this.Controls.Add(this.dataGridViewKhachHang);
             this.Controls.Add(this.dateTimePickerNgaySinh);
             this.Controls.Add(this.buttonThoat);
@@ -330,7 +331,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormKhachHang";
             this.Text = "FormKhachHang";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewKhachHang)).EndInit();
