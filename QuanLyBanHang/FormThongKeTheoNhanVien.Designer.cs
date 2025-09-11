@@ -31,10 +31,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxTenNV = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.buttonXuatExcel = new System.Windows.Forms.Button();
+            this.dgvThongKe = new System.Windows.Forms.DataGridView();
+            this.buttonExport = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvThongKe)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -65,29 +65,29 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.btnThongKe_Click);
             // 
-            // dataGridView1
+            // dgvThongKe
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(75, 220);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(734, 230);
-            this.dataGridView1.TabIndex = 4;
+            this.dgvThongKe.AllowUserToAddRows = false;
+            this.dgvThongKe.AllowUserToDeleteRows = false;
+            this.dgvThongKe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvThongKe.Location = new System.Drawing.Point(75, 220);
+            this.dgvThongKe.Name = "dgvThongKe";
+            this.dgvThongKe.ReadOnly = true;
+            this.dgvThongKe.RowHeadersWidth = 62;
+            this.dgvThongKe.RowTemplate.Height = 28;
+            this.dgvThongKe.Size = new System.Drawing.Size(734, 230);
+            this.dgvThongKe.TabIndex = 4;
             // 
-            // buttonXuatExcel
+            // buttonExport
             // 
-            this.buttonXuatExcel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.buttonXuatExcel.Location = new System.Drawing.Point(602, 481);
-            this.buttonXuatExcel.Name = "buttonXuatExcel";
-            this.buttonXuatExcel.Size = new System.Drawing.Size(116, 42);
-            this.buttonXuatExcel.TabIndex = 5;
-            this.buttonXuatExcel.Text = "Xuất Excel";
-            this.buttonXuatExcel.UseVisualStyleBackColor = true;
-            this.buttonXuatExcel.Click += new System.EventHandler(this.btnThongKe_Click);
+            this.buttonExport.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.buttonExport.Location = new System.Drawing.Point(622, 478);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(116, 42);
+            this.buttonExport.TabIndex = 5;
+            this.buttonExport.Text = "Xuất Excel";
+            this.buttonExport.UseVisualStyleBackColor = true;
+            this.buttonExport.Click += new System.EventHandler(this.btnThongKe_Click);
             // 
             // label2
             // 
@@ -106,14 +106,14 @@
             this.ClientSize = new System.Drawing.Size(899, 563);
             this.ControlBox = false;
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.buttonXuatExcel);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.buttonExport);
+            this.Controls.Add(this.dgvThongKe);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBoxTenNV);
             this.Controls.Add(this.label1);
             this.Name = "FormThongKeTheoNhanVien";
             this.Text = "FormThongKeTheoNhanVien";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvThongKe)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,8 +124,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxTenNV;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button buttonXuatExcel;
+        private System.Windows.Forms.DataGridView dgvThongKe;
+        private System.Windows.Forms.Button buttonExport;
         private System.Windows.Forms.Label label2;
     }
 }

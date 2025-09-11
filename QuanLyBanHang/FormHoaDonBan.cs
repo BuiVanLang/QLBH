@@ -1,6 +1,9 @@
 ﻿    using System;
     using System.Data;
     using System.Data.SqlClient;
+    using System.IO;
+    using OfficeOpenXml;
+    using Excle = Microsoft.Office.Interop.Excel;
     using System.Windows.Forms;
 
     namespace QuanLyBanHang
@@ -9,15 +12,20 @@
         {
             
             private readonly string Nguon = @"Data Source=BuiVanLang;Initial Catalog=QLBH3;Integrated Security=True";
-            
-            public FormHoaDonBan()
+        private DataTable dtHoaDonBan;
+        public FormHoaDonBan()
             {
                 InitializeComponent();
                 SetupDataGridView();
                 SetupEventHandlers();
-            }
+            textBoxTimKiem.TextChanged += textBoxTimKiem_TextChanged;
+        }
+        private void textBoxTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            TimKiemHoaDonBan();
+        }
 
-            private void SetupDataGridView()
+        private void SetupDataGridView()
             {
                 dataGridViewHoaDonBan.Columns.Clear();
                 // Thiết lập các cột cho DataGridView
@@ -97,7 +105,8 @@
                 buttonXoa.Click += buttonXoa_Click;
                 buttonThoat.Click += buttonThoat_Click;
                 this.Load += FormHoaDonBan_Load;
-            }
+            this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
+        }
 
             private void FormHoaDonBan_Load(object sender, EventArgs e)
             {
@@ -131,11 +140,11 @@
                                        ORDER BY h.ID";
 
                         SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        dataGridViewHoaDonBan.DataSource = dt;
+                    dtHoaDonBan = new DataTable();
+                    da.Fill(dtHoaDonBan);
+                    dataGridViewHoaDonBan.DataSource = dtHoaDonBan;
 
-                        UpdateStatusLabel();
+                    UpdateStatusLabel();
                     }
                 }
                 catch (Exception ex)
@@ -618,5 +627,69 @@
         {
 
         }
+        private void TimKiemHoaDonBan()
+        {
+            if (dtHoaDonBan == null) return;
+
+            string tuKhoa = textBoxTimKiem.Text.Trim().Replace("'", "''");
+
+            if (string.IsNullOrEmpty(tuKhoa))
+            {
+                dataGridViewHoaDonBan.DataSource = dtHoaDonBan; // hiển thị lại toàn bộ
+            }
+            else
+            {
+                DataView dv = new DataView(dtHoaDonBan  );
+                dv.RowFilter = $"TenNhanVien LIKE '%{tuKhoa}%' ";
+                dataGridViewHoaDonBan.DataSource = dv;
+            }
+        }
+        private void ExportExcel(string path)
+        {
+            Excle.Application application = new Excle.Application();
+            application.Application.Workbooks.Add(Type.Missing);
+
+            // Xuất tiêu đề cột
+            for (int i = 0; i < dataGridViewHoaDonBan.Columns.Count; i++)
+            {
+                application.Cells[1, i + 1] = dataGridViewHoaDonBan.Columns[i].HeaderText;
+            }
+
+            // Xuất dữ liệu 
+            for (int i = 0; i < dataGridViewHoaDonBan.Rows.Count; i++)
+            {
+                if (dataGridViewHoaDonBan.Rows[i].IsNewRow) continue; // bỏ qua dòng trống
+
+                for (int j = 0; j < dataGridViewHoaDonBan.Columns.Count; j++)
+                {
+                    var value = dataGridViewHoaDonBan.Rows[i].Cells[j].Value;
+                    application.Cells[i + 2, j + 1] = value == null ? "" : value.ToString();
+                }
+            }
+
+            application.Columns.AutoFit();
+            application.ActiveWorkbook.SaveCopyAs(path);
+            application.ActiveWorkbook.Saved = true;
+            application.Quit(); // đóng Excel để giải phóng
+        }
+
+        private void buttonExport_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Excel File";
+            saveFileDialog.Filter = "Excel File|*.xlsx;*.xls;*.xlsm";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    ExportExcel(saveFileDialog.FileName);
+                    MessageBox.Show("Xuất file thành công");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi: " + ex.Message);
+                }
+            }
+        }
     }
-    }
+}

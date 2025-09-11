@@ -2,7 +2,9 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-//using Excel = Microsoft.Office.Interop.Excel;
+using System.IO;
+using OfficeOpenXml;
+using Excle = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 
 namespace QuanLyBanHang
@@ -18,6 +20,7 @@ namespace QuanLyBanHang
         {
             InitializeComponent();
             LoadData();
+            this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
         }
 
         private void LoadData()
@@ -54,8 +57,8 @@ namespace QuanLyBanHang
                         DataTable dt = new DataTable();
                         da.Fill(dt);
 
-                        dataGridView1.AutoGenerateColumns = true;
-                        dataGridView1.DataSource = dt;
+                        dgvThongKe.AutoGenerateColumns = true;
+                        dgvThongKe.DataSource = dt;
 
                         // Định dạng DataGridView
                         FormatDataGridView();
@@ -81,23 +84,23 @@ namespace QuanLyBanHang
         {
             try
             {
-                if (dataGridView1.Columns.Contains("TenNhanVien"))
-                    dataGridView1.Columns["TenNhanVien"].HeaderText = "Tên nhân viên";
+                if (dgvThongKe.Columns.Contains("TenNhanVien"))
+                    dgvThongKe.Columns["TenNhanVien"].HeaderText = "Tên nhân viên";
 
-                if (dataGridView1.Columns.Contains("SoHoaDon"))
+                if (dgvThongKe.Columns.Contains("SoHoaDon"))
                 {
-                    dataGridView1.Columns["SoHoaDon"].HeaderText = "Số HĐ";
-                    dataGridView1.Columns["SoHoaDon"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    dgvThongKe.Columns["SoHoaDon"].HeaderText = "Số HĐ";
+                    dgvThongKe.Columns["SoHoaDon"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 }
 
-                if (dataGridView1.Columns.Contains("DoanhThu"))
+                if (dgvThongKe.Columns.Contains("DoanhThu"))
                 {
-                    dataGridView1.Columns["DoanhThu"].HeaderText = "Doanh thu (VNĐ)";
-                    dataGridView1.Columns["DoanhThu"].DefaultCellStyle.Format = "N0";
-                    dataGridView1.Columns["DoanhThu"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvThongKe.Columns["DoanhThu"].HeaderText = "Doanh thu (VNĐ)";
+                    dgvThongKe.Columns["DoanhThu"].DefaultCellStyle.Format = "N0";
+                    dgvThongKe.Columns["DoanhThu"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 }
 
-                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgvThongKe.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
             catch (Exception ex)
             {
@@ -128,323 +131,52 @@ namespace QuanLyBanHang
             }
         }
 
-        private void btnXuatExcel_Click(object sender, EventArgs e)
+        private void ExportExcel(string path)
         {
-            // Kiểm tra dữ liệu
-            if (dataGridView1.DataSource == null || dataGridView1.Rows.Count == 0)
+            Excle.Application application = new Excle.Application();
+            application.Application.Workbooks.Add(Type.Missing);
+
+            // Xuất tiêu đề cột
+            for (int i = 0; i < dgvThongKe.Columns.Count; i++)
             {
-                MessageBox.Show("Không có dữ liệu để xuất!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                application.Cells[1, i + 1] = dgvThongKe.Columns[i].HeaderText;
             }
 
-            // Tạo dialog lưu file
-            SaveFileDialog saveFileDialog = new SaveFileDialog
+            // Xuất dữ liệu
+            for (int i = 0; i < dgvThongKe.Rows.Count; i++)
             {
-                Filter = "Excel Files|*.xlsx",
-                Title = "Lưu báo cáo thống kê",
-                FileName = $"BaoCaoNhanVien_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx"
-            };
+                if (dgvThongKe.Rows[i].IsNewRow) continue; // bỏ qua dòng trống
 
-            if (saveFileDialog.ShowDialog() != DialogResult.OK)
-                return;
-
-            // Hiển thị cursor loading
-            this.Cursor = Cursors.WaitCursor;
-
-            try
-            {
-                ExportDataToExcel(saveFileDialog.FileName);
-
-                // Thông báo thành công và hỏi có muốn mở file
-                DialogResult result = MessageBox.Show(
-                    $"Xuất Excel thành công!\n\nĐường dẫn: {saveFileDialog.FileName}\n\nBạn có muốn mở file không?",
-                    "Thành công",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Information);
-
-                if (result == DialogResult.Yes)
+                for (int j = 0; j < dgvThongKe.Columns.Count; j++)
                 {
-                    System.Diagnostics.Process.Start(saveFileDialog.FileName);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi xuất Excel: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                this.Cursor = Cursors.Default;
-            }
-        }
-
-        private void ExportDataToExcel(string filePath)
-        {
-           /* Excel.Application excelApp = null;
-            Excel._Workbook workbook = null;
-            Excel._Worksheet worksheet = null;
-
-            try
-            {
-                // Khởi tạo Excel Application
-                excelApp = new Excel.Application
-                {
-                    Visible = false,
-                    ScreenUpdating = false,
-                    DisplayAlerts = false
-                };
-
-                // Tạo workbook và worksheet
-                workbook = excelApp.Workbooks.Add();
-                worksheet = workbook.ActiveSheet;
-                worksheet.Name = "Thống Kê Nhân Viên";
-
-                // Tạo tiêu đề báo cáo
-                CreateReportHeader(worksheet);
-
-                // Tạo header cho bảng dữ liệu
-                CreateTableHeader(worksheet);
-
-                // Xuất dữ liệu
-                ExportTableData(worksheet);
-
-                // Định dạng bảng
-                FormatTable(worksheet);
-
-                // Tự động điều chỉnh độ rộng cột
-                worksheet.Columns.AutoFit();
-
-                // Lưu file
-                workbook.SaveAs(filePath);
-            }
-            finally
-            {
-                // Đóng và giải phóng tài nguyên
-                CleanupExcelObjects(worksheet, workbook, excelApp);
-            }
-        }
-
-        private void CreateReportHeader(Excel._Worksheet worksheet)
-        {
-            // Tiêu đề chính
-            worksheet.Cells[1, 1] = "BÁO CÁO THỐNG KÊ DOANH THU THEO NHÂN VIÊN";
-            Excel.Range titleRange = worksheet.Range["A1", $"{GetColumnLetter(dataGridView1.Columns.Count)}1"];
-            titleRange.Merge();
-            titleRange.Font.Bold = true;
-            titleRange.Font.Size = 14;
-            titleRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-            titleRange.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightBlue);
-
-            // Thông tin thời gian
-            worksheet.Cells[2, 1] = $"Ngày xuất báo cáo: {DateTime.Now:dd/MM/yyyy HH:mm}";
-            worksheet.Cells[3, 1] = $"Tìm kiếm theo: {(string.IsNullOrEmpty(textBoxTenNV.Text) ? "Tất cả nhân viên" : textBoxTenNV.Text)}";
-
-            // Dòng trống
-            worksheet.Cells[4, 1] = "";*/
-        }
-
-       /* private void CreateTableHeader(Excel._Worksheet worksheet)
-        {
-            const int headerRow = 5;
-
-            for (int i = 0; i < dataGridView1.Columns.Count; i++)
-            {
-                Excel.Range cell = worksheet.Cells[headerRow, i + 1];
-                cell.Value = dataGridView1.Columns[i].HeaderText;
-                cell.Font.Bold = true;
-                cell.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
-                cell.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                cell.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
-            }
-        }
-
-        private void ExportTableData(Excel._Worksheet worksheet)
-        {
-            const int dataStartRow = 6;
-            int doanhThuColumnIndex = FindColumnIndex("DoanhThu");
-            int soHoaDonColumnIndex = FindColumnIndex("SoHoaDon");
-
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
-            {
-                for (int j = 0; j < dataGridView1.Columns.Count; j++)
-                {
-                    var cellValue = dataGridView1.Rows[i].Cells[j].Value;
-                    Excel.Range cell = worksheet.Cells[dataStartRow + i, j + 1];
-
-                    if (cellValue != null && !string.IsNullOrEmpty(cellValue.ToString()))
-                    {
-                        if (j == doanhThuColumnIndex)
-                        {
-                            // Định dạng cột doanh thu
-                            if (decimal.TryParse(cellValue.ToString(), out decimal money))
-                            {
-                                cell.Value = money;
-                                cell.NumberFormat = "#,##0\" VNĐ\"";
-                                cell.HorizontalAlignment = Excel.XlHAlign.xlHAlignRight;
-                            }
-                        }
-                        else if (j == soHoaDonColumnIndex)
-                        {
-                            // Định dạng cột số hóa đơn
-                            if (int.TryParse(cellValue.ToString(), out int count))
-                            {
-                                cell.Value = count;
-                                cell.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                            }
-                        }
-                        else
-                        {
-                            // Các cột khác
-                            cell.Value = cellValue.ToString();
-                            cell.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
-                        }
-                    }
-
-                    cell.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
-                }
-            }
-        }
-
-        private void FormatTable(Excel._Worksheet worksheet)
-        {
-            int lastRow = 5 + dataGridView1.Rows.Count;
-            int lastColumn = dataGridView1.Columns.Count;
-
-            // Tạo viền cho toàn bộ bảng
-            Excel.Range tableRange = worksheet.Range[
-                worksheet.Cells[5, 1],
-                worksheet.Cells[lastRow, lastColumn]
-            ];
-            tableRange.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
-            tableRange.Borders.Weight = Excel.XlBorderWeight.xlThin;
-
-            // Tạo dòng tổng kết nếu có nhiều hơn 1 dòng dữ liệu
-            if (dataGridView1.Rows.Count > 1)
-            {
-                CreateSummaryRow(worksheet, lastRow + 1, lastColumn);
-            }
-
-           
-        }
-
-        private void CreateSummaryRow(Excel._Worksheet worksheet, int summaryRow, int lastColumn)
-        {
-            // Tính tổng
-            decimal totalRevenue = 0;
-            int totalInvoices = 0;
-
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (row.Cells["DoanhThu"].Value != null &&
-                    decimal.TryParse(row.Cells["DoanhThu"].Value.ToString(), out decimal revenue))
-                {
-                    totalRevenue += revenue;
-                }
-
-                if (row.Cells["SoHoaDon"].Value != null &&
-                    int.TryParse(row.Cells["SoHoaDon"].Value.ToString(), out int invoices))
-                {
-                    totalInvoices += invoices;
+                    var value = dgvThongKe.Rows[i].Cells[j].Value;
+                    application.Cells[i + 2, j + 1] = value == null ? "" : value.ToString();
                 }
             }
 
-            // Tạo dòng tổng kết
-            Excel.Range summaryCell1 = worksheet.Cells[summaryRow, 1];
-            summaryCell1.Value = "TỔNG CỘNG";
-            summaryCell1.Font.Bold = true;
-            summaryCell1.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Yellow);
-
-            int soHoaDonCol = FindColumnIndex("SoHoaDon");
-            int doanhThuCol = FindColumnIndex("DoanhThu");
-
-            if (soHoaDonCol >= 0)
-            {
-                Excel.Range totalInvoiceCell = worksheet.Cells[summaryRow, soHoaDonCol + 1];
-                totalInvoiceCell.Value = totalInvoices;
-                totalInvoiceCell.Font.Bold = true;
-                totalInvoiceCell.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                totalInvoiceCell.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Yellow);
-            }
-
-            if (doanhThuCol >= 0)
-            {
-                Excel.Range totalRevenueCell = worksheet.Cells[summaryRow, doanhThuCol + 1];
-                totalRevenueCell.Value = totalRevenue;
-                totalRevenueCell.Font.Bold = true;
-                totalRevenueCell.NumberFormat = "#,##0\" VNĐ\"";
-                totalRevenueCell.HorizontalAlignment = Excel.XlHAlign.xlHAlignRight;
-                totalRevenueCell.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Yellow);
-            }
-
-            // Tạo viền cho dòng tổng kết
-            Excel.Range summaryRange = worksheet.Range[
-                worksheet.Cells[summaryRow, 1],
-                worksheet.Cells[summaryRow, lastColumn]
-            ];
-            summaryRange.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
-            summaryRange.Borders.Weight = Excel.XlBorderWeight.xlThick;
+            application.Columns.AutoFit();
+            application.ActiveWorkbook.SaveCopyAs(path);
+            application.ActiveWorkbook.Saved = true;
+            application.Quit(); // đóng Excel để giải phóng
         }
 
-        private int FindColumnIndex(string columnName)
+        private void buttonExport_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Excel File";
+            saveFileDialog.Filter = "Excel File|*.xlsx;*.xls;*.xlsm";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (dataGridView1.Columns[i].Name.Equals(columnName, StringComparison.OrdinalIgnoreCase))
-                    return i;
+                try
+                {
+                    ExportExcel(saveFileDialog.FileName);
+                    MessageBox.Show("Xuất file thành công");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi: " + ex.Message);
+                }
             }
-            return -1;
         }
-
-        private string GetColumnLetter(int columnNumber)
-        {
-            string columnName = "";
-            while (columnNumber > 0)
-            {
-                int modulo = (columnNumber - 1) % 26;
-                columnName = Convert.ToChar(65 + modulo) + columnName;
-                columnNumber = (columnNumber - modulo) / 26;
-            }
-            return columnName;
-        }
-
-        private void CleanupExcelObjects(Excel._Worksheet worksheet, Excel._Workbook workbook, Excel.Application excelApp)
-        {
-            try
-            {
-                // Đóng worksheet
-                if (worksheet != null)
-                {
-                    Marshal.ReleaseComObject(worksheet);
-                }
-
-                // Đóng workbook
-                if (workbook != null)
-                {
-                    workbook.Close(false);
-                    Marshal.ReleaseComObject(workbook);
-                }
-
-                // Đóng Excel application
-                if (excelApp != null)
-                {
-                    excelApp.ScreenUpdating = true;
-                    excelApp.DisplayAlerts = true;
-                    excelApp.Quit();
-                    Marshal.ReleaseComObject(excelApp);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Lỗi khi giải phóng tài nguyên Excel: {ex.Message}");
-            }
-            finally
-            {
-                // Buộc garbage collection
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                GC.Collect();
-            }
-        }*/
     }
 }

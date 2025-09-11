@@ -19,11 +19,13 @@ namespace QuanLyBanHang
                     // Nếu đăng nhập thành công thì chạy form chính
                     Application.Run(new Form11());
                 }
+
                 else
                 {
                     // Nếu đăng nhập thất bại hoặc bấm thoát
                     Application.Exit();
                 }
+
             }
         }
     }

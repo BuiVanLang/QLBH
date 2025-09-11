@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
+using OfficeOpenXml;
+using Excle = Microsoft.Office.Interop.Excel;
 using System.Windows.Forms;
 
 namespace QuanLyBanHang
@@ -19,6 +22,7 @@ namespace QuanLyBanHang
             dataGridViewChatLieu.CellClick += DataGridViewChatLieu_CellClick;
             this.Load += FormChatLieu_Load;
             textBoxTimKiem.TextChanged += textBoxTimKiem_TextChanged;
+            this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
         }
         private void textBoxTimKiem_TextChanged(object sender, EventArgs e)
         {
@@ -167,6 +171,52 @@ namespace QuanLyBanHang
                 dataGridViewChatLieu.DataSource = dv;
             }
         }
+        private void ExportExcel(string path)
+        {
+            Excle.Application application = new Excle.Application();
+            application.Application.Workbooks.Add(Type.Missing);
 
+            // Xuất tiêu đề cột
+            for (int i = 0; i < dataGridViewChatLieu.Columns.Count; i++)
+            {
+                application.Cells[1, i + 1] = dataGridViewChatLieu.Columns[i].HeaderText;
+            }
+
+            // Xuất dữ liệu 
+            for (int i = 0; i < dataGridViewChatLieu.Rows.Count; i++)
+            {
+                if (dataGridViewChatLieu.Rows[i].IsNewRow) continue; // bỏ qua dòng trống
+
+                for (int j = 0; j < dataGridViewChatLieu.Columns.Count; j++)
+                {
+                    var value = dataGridViewChatLieu.Rows[i].Cells[j].Value;
+                    application.Cells[i + 2, j + 1] = value == null ? "" : value.ToString();
+                }
+            }
+
+            application.Columns.AutoFit();
+            application.ActiveWorkbook.SaveCopyAs(path);
+            application.ActiveWorkbook.Saved = true;
+            application.Quit(); // đóng Excel để giải phóng
+        }
+
+        private void buttonExport_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Excel File";
+            saveFileDialog.Filter = "Excel File|*.xlsx;*.xls;*.xlsm";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    ExportExcel(saveFileDialog.FileName);
+                    MessageBox.Show("Xuất file thành công");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi: " + ex.Message);
+                }
+            }
+        }
     }
 }

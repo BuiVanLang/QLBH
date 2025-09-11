@@ -44,7 +44,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label1.Location = new System.Drawing.Point(237, 67);
+            this.label1.Location = new System.Drawing.Point(279, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(326, 36);
             this.label1.TabIndex = 0;
@@ -140,6 +140,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ControlBox = false;
             this.Controls.Add(this.buttonThoat);
             this.Controls.Add(this.buttonDangKy);
             this.Controls.Add(this.buttonDangNhap);
@@ -151,7 +152,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormTaiKhoan";
-            this.Text = "FormTaiKhoan";
             this.ResumeLayout(false);
             this.PerformLayout();
 

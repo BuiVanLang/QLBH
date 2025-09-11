@@ -47,7 +47,8 @@
             this.comboBoxMaKhachHang = new System.Windows.Forms.ComboBox();
             this.comboBoxMaNhanVien = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxTimKiem = new System.Windows.Forms.TextBox();
+            this.buttonExport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHoaDonBan)).BeginInit();
             this.SuspendLayout();
             // 
@@ -186,7 +187,7 @@
             this.ID.MinimumWidth = 8;
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
-            this.ID.Width = 137;
+            this.ID.Width = 117;
             // 
             // ID_ChiTietHoaDon
             // 
@@ -195,7 +196,7 @@
             this.ID_ChiTietHoaDon.MinimumWidth = 8;
             this.ID_ChiTietHoaDon.Name = "ID_ChiTietHoaDon";
             this.ID_ChiTietHoaDon.ReadOnly = true;
-            this.ID_ChiTietHoaDon.Width = 169;
+            this.ID_ChiTietHoaDon.Width = 139;
             // 
             // ID_NhanVien
             // 
@@ -204,7 +205,7 @@
             this.ID_NhanVien.MinimumWidth = 8;
             this.ID_NhanVien.Name = "ID_NhanVien";
             this.ID_NhanVien.ReadOnly = true;
-            this.ID_NhanVien.Width = 146;
+            this.ID_NhanVien.Width = 124;
             // 
             // ID_KhachHang
             // 
@@ -213,7 +214,7 @@
             this.ID_KhachHang.MinimumWidth = 8;
             this.ID_KhachHang.Name = "ID_KhachHang";
             this.ID_KhachHang.ReadOnly = true;
-            this.ID_KhachHang.Width = 159;
+            this.ID_KhachHang.Width = 135;
             // 
             // comboBoxMaChiTietHoaDon
             // 
@@ -253,13 +254,23 @@
             this.label6.TabIndex = 17;
             this.label6.Text = "Tìm Kiếm:";
             // 
-            // textBox1
+            // textBoxTimKiem
             // 
-            this.textBox1.Location = new System.Drawing.Point(877, 98);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(156, 26);
-            this.textBox1.TabIndex = 18;
+            this.textBoxTimKiem.Location = new System.Drawing.Point(877, 98);
+            this.textBoxTimKiem.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBoxTimKiem.Name = "textBoxTimKiem";
+            this.textBoxTimKiem.Size = new System.Drawing.Size(156, 26);
+            this.textBoxTimKiem.TabIndex = 18;
+            // 
+            // buttonExport
+            // 
+            this.buttonExport.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.buttonExport.Location = new System.Drawing.Point(755, 165);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(108, 38);
+            this.buttonExport.TabIndex = 19;
+            this.buttonExport.Text = "Export";
+            this.buttonExport.UseVisualStyleBackColor = true;
             // 
             // FormHoaDonBan
             // 
@@ -267,7 +278,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1126, 629);
             this.ControlBox = false;
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.buttonExport);
+            this.Controls.Add(this.textBoxTimKiem);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBoxMaNhanVien);
             this.Controls.Add(this.comboBoxMaKhachHang);
@@ -286,7 +298,6 @@
             this.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "FormHoaDonBan";
-            this.Text = "FormHoaDonBanHang";
             this.Load += new System.EventHandler(this.FormHoaDonBan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHoaDonBan)).EndInit();
             this.ResumeLayout(false);
@@ -315,6 +326,7 @@
         private System.Windows.Forms.ComboBox comboBoxMaKhachHang;
         private System.Windows.Forms.ComboBox comboBoxMaNhanVien;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxTimKiem;
+        private System.Windows.Forms.Button buttonExport;
     }
 }

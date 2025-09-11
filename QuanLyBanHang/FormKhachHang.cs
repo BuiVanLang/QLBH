@@ -7,7 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;    
+using System.Data.SqlClient;
+using System.IO;
+using OfficeOpenXml;
+using Excle = Microsoft.Office.Interop.Excel;
 namespace QuanLyBanHang
 {
     public partial class FormKhachHang : Form
@@ -26,6 +29,7 @@ namespace QuanLyBanHang
             dataGridViewKhachHang.CellClick += DataGridViewKhachHang_CellClick;
             this.Load += FormKhachHang_Load;
             textBoxTimKiem.TextChanged += textBoxTimKiem_TextChanged;
+            this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
         }
         private void textBoxTimKiem_TextChanged(object sender, EventArgs e)
         {
@@ -231,6 +235,53 @@ dataGridViewKhachHang.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "
                 DataView dv = new DataView(dtKhachHang);
                 dv.RowFilter = $"Ten LIKE '%{tuKhoa}%' OR SDT LIKE '%{tuKhoa}%'";
                 dataGridViewKhachHang.DataSource = dv;
+            }
+        }
+        private void ExportExcel(string path)
+        {
+            Excle.Application application = new Excle.Application();
+            application.Application.Workbooks.Add(Type.Missing);
+
+            // Xuất tiêu đề cột
+            for (int i = 0; i < dataGridViewKhachHang.Columns.Count; i++)
+            {
+                application.Cells[1, i + 1] = dataGridViewKhachHang.Columns[i].HeaderText;
+            }
+
+            // Xuất dữ liệu 
+            for (int i = 0; i < dataGridViewKhachHang.Rows.Count; i++)
+            {
+                if (dataGridViewKhachHang.Rows[i].IsNewRow) continue; // bỏ qua dòng trống
+
+                for (int j = 0; j < dataGridViewKhachHang.Columns.Count; j++)
+                {
+                    var value = dataGridViewKhachHang.Rows[i].Cells[j].Value;
+                    application.Cells[i + 2, j + 1] = value == null ? "" : value.ToString();
+                }
+            }
+
+            application.Columns.AutoFit();
+            application.ActiveWorkbook.SaveCopyAs(path);
+            application.ActiveWorkbook.Saved = true;
+            application.Quit(); // đóng Excel để giải phóng
+        }
+
+        private void buttonExport_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Excel File";
+            saveFileDialog.Filter = "Excel File|*.xlsx;*.xls;*.xlsm";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    ExportExcel(saveFileDialog.FileName);
+                    MessageBox.Show("Xuất file thành công");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi: " + ex.Message);
+                }
             }
         }
 

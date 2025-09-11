@@ -30,13 +30,13 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.hệThốngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tàiKhoanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.đăngKýTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuTaiKhoan = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuDangKyTaiKhoan = new System.Windows.Forms.ToolStripMenuItem();
             this.danhMụcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuNhanVien = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuKhachHang = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuHangHoa = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuChatLieu = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuHangHoa = new System.Windows.Forms.ToolStripMenuItem();
             this.hóaĐơnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuChiTietHoaDonBanHang = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuHoaDonBanHang = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +48,8 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            this.menuStrip1.ForeColor = System.Drawing.Color.White;
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -65,23 +67,29 @@
             // hệThốngToolStripMenuItem
             // 
             this.hệThốngToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tàiKhoanToolStripMenuItem,
-            this.đăngKýTàiKhoảnToolStripMenuItem});
+            this.MenuTaiKhoan,
+            this.MenuDangKyTaiKhoan});
+            this.hệThốngToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
             this.hệThốngToolStripMenuItem.Name = "hệThốngToolStripMenuItem";
-            this.hệThốngToolStripMenuItem.Size = new System.Drawing.Size(106, 29);
-            this.hệThốngToolStripMenuItem.Text = "Hệ Thống";
+            this.hệThốngToolStripMenuItem.Size = new System.Drawing.Size(136, 29);
+            this.hệThốngToolStripMenuItem.Text = "🔧 Hệ Thống";
+            this.hệThốngToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.hệThốngToolStripMenuItem_DropDownItemClicked);
             // 
-            // tàiKhoanToolStripMenuItem
+            // MenuTaiKhoan
             // 
-            this.tàiKhoanToolStripMenuItem.Name = "tàiKhoanToolStripMenuItem";
-            this.tàiKhoanToolStripMenuItem.Size = new System.Drawing.Size(260, 34);
-            this.tàiKhoanToolStripMenuItem.Text = "Tài Khoản";
+            this.MenuTaiKhoan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
+            this.MenuTaiKhoan.ForeColor = System.Drawing.Color.IndianRed;
+            this.MenuTaiKhoan.Name = "MenuTaiKhoan";
+            this.MenuTaiKhoan.Size = new System.Drawing.Size(290, 34);
+            this.MenuTaiKhoan.Text = "👤 Tài Khoản";
             // 
-            // đăngKýTàiKhoảnToolStripMenuItem
+            // MenuDangKyTaiKhoan
             // 
-            this.đăngKýTàiKhoảnToolStripMenuItem.Name = "đăngKýTàiKhoảnToolStripMenuItem";
-            this.đăngKýTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(260, 34);
-            this.đăngKýTàiKhoảnToolStripMenuItem.Text = "Đăng Ký Tài Khoản";
+            this.MenuDangKyTaiKhoan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
+            this.MenuDangKyTaiKhoan.ForeColor = System.Drawing.Color.IndianRed;
+            this.MenuDangKyTaiKhoan.Name = "MenuDangKyTaiKhoan";
+            this.MenuDangKyTaiKhoan.Size = new System.Drawing.Size(290, 34);
+            this.MenuDangKyTaiKhoan.Text = "📝 Đăng Ký Tài Khoản";
             // 
             // danhMụcToolStripMenuItem
             // 
@@ -90,83 +98,104 @@
             this.MenuKhachHang,
             this.MenuChatLieu,
             this.MenuHangHoa});
+            this.danhMụcToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
             this.danhMụcToolStripMenuItem.Name = "danhMụcToolStripMenuItem";
-            this.danhMụcToolStripMenuItem.Size = new System.Drawing.Size(109, 29);
-            this.danhMụcToolStripMenuItem.Text = "Danh Mục";
+            this.danhMụcToolStripMenuItem.Size = new System.Drawing.Size(139, 29);
+            this.danhMụcToolStripMenuItem.Text = "📂 Danh Mục";
             this.danhMụcToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.danhMucToolStripMenuItem_DropDownItemClicked);
             // 
             // MenuNhanVien
             // 
+            this.MenuNhanVien.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
+            this.MenuNhanVien.ForeColor = System.Drawing.Color.IndianRed;
             this.MenuNhanVien.Name = "MenuNhanVien";
             this.MenuNhanVien.Size = new System.Drawing.Size(270, 34);
-            this.MenuNhanVien.Text = "Nhân Viên";
+            this.MenuNhanVien.Text = "👥 Nhân Viên";
             // 
             // MenuKhachHang
             // 
+            this.MenuKhachHang.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
+            this.MenuKhachHang.ForeColor = System.Drawing.Color.IndianRed;
             this.MenuKhachHang.Name = "MenuKhachHang";
             this.MenuKhachHang.Size = new System.Drawing.Size(270, 34);
-            this.MenuKhachHang.Text = " Khách Hàng";
-            // 
-            // MenuHangHoa
-            // 
-            this.MenuHangHoa.Name = "MenuHangHoa";
-            this.MenuHangHoa.Size = new System.Drawing.Size(270, 34);
-            this.MenuHangHoa.Text = "Hàng Hóa";
+            this.MenuKhachHang.Text = "🛒 Khách Hàng";
             // 
             // MenuChatLieu
             // 
+            this.MenuChatLieu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
+            this.MenuChatLieu.ForeColor = System.Drawing.Color.IndianRed;
             this.MenuChatLieu.Name = "MenuChatLieu";
             this.MenuChatLieu.Size = new System.Drawing.Size(270, 34);
-            this.MenuChatLieu.Text = "Chất Liệu";
+            this.MenuChatLieu.Text = "🏷️ Chất Liệu";
+            // 
+            // MenuHangHoa
+            // 
+            this.MenuHangHoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
+            this.MenuHangHoa.ForeColor = System.Drawing.Color.IndianRed;
+            this.MenuHangHoa.Name = "MenuHangHoa";
+            this.MenuHangHoa.Size = new System.Drawing.Size(270, 34);
+            this.MenuHangHoa.Text = "📦 Hàng Hóa";
             // 
             // hóaĐơnToolStripMenuItem
             // 
             this.hóaĐơnToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuChiTietHoaDonBanHang,
             this.MenuHoaDonBanHang});
+            this.hóaĐơnToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
             this.hóaĐơnToolStripMenuItem.Name = "hóaĐơnToolStripMenuItem";
-            this.hóaĐơnToolStripMenuItem.Size = new System.Drawing.Size(100, 29);
-            this.hóaĐơnToolStripMenuItem.Text = "Hóa Đơn";
+            this.hóaĐơnToolStripMenuItem.Size = new System.Drawing.Size(130, 29);
+            this.hóaĐơnToolStripMenuItem.Text = "🧾 Hóa Đơn";
             this.hóaĐơnToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.hóaĐơnToolStripMenuItem_DropDownItemClicked);
             // 
             // MenuChiTietHoaDonBanHang
             // 
+            this.MenuChiTietHoaDonBanHang.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
+            this.MenuChiTietHoaDonBanHang.ForeColor = System.Drawing.Color.IndianRed;
             this.MenuChiTietHoaDonBanHang.Name = "MenuChiTietHoaDonBanHang";
-            this.MenuChiTietHoaDonBanHang.Size = new System.Drawing.Size(283, 34);
-            this.MenuChiTietHoaDonBanHang.Text = "Chi Tiết Hóa Đơn Bán";
+            this.MenuChiTietHoaDonBanHang.Size = new System.Drawing.Size(313, 34);
+            this.MenuChiTietHoaDonBanHang.Text = "📋 Chi Tiết Hóa Đơn Bán";
             // 
             // MenuHoaDonBanHang
             // 
+            this.MenuHoaDonBanHang.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
+            this.MenuHoaDonBanHang.ForeColor = System.Drawing.Color.IndianRed;
             this.MenuHoaDonBanHang.Name = "MenuHoaDonBanHang";
-            this.MenuHoaDonBanHang.Size = new System.Drawing.Size(283, 34);
-            this.MenuHoaDonBanHang.Text = "Hóa Đơn Bán Hàng";
+            this.MenuHoaDonBanHang.Size = new System.Drawing.Size(313, 34);
+            this.MenuHoaDonBanHang.Text = "💳 Hóa Đơn Bán Hàng";
             // 
             // báoCáoToolStripMenuItem
             // 
             this.báoCáoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuThongKeTheoNhanVien,
             this.MenuThongKeTheoDonHang});
+            this.báoCáoToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
             this.báoCáoToolStripMenuItem.Name = "báoCáoToolStripMenuItem";
-            this.báoCáoToolStripMenuItem.Size = new System.Drawing.Size(191, 29);
-            this.báoCáoToolStripMenuItem.Text = " Báo Cáo - Thống Kê";
+            this.báoCáoToolStripMenuItem.Size = new System.Drawing.Size(216, 29);
+            this.báoCáoToolStripMenuItem.Text = "📊 Báo Cáo - Thống Kê";
             this.báoCáoToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.báoCáoToolStripMenuItem_DropDownItemClicked);
+            this.báoCáoToolStripMenuItem.Click += new System.EventHandler(this.báoCáoToolStripMenuItem_Click_1);
             // 
             // MenuThongKeTheoNhanVien
             // 
+            this.MenuThongKeTheoNhanVien.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
+            this.MenuThongKeTheoNhanVien.ForeColor = System.Drawing.Color.IndianRed;
             this.MenuThongKeTheoNhanVien.Name = "MenuThongKeTheoNhanVien";
-            this.MenuThongKeTheoNhanVien.Size = new System.Drawing.Size(320, 34);
-            this.MenuThongKeTheoNhanVien.Text = "Thống Kê Theo Nhân Viên";
+            this.MenuThongKeTheoNhanVien.Size = new System.Drawing.Size(350, 34);
+            this.MenuThongKeTheoNhanVien.Text = "📈 Thống Kê Theo Nhân Viên";
             // 
             // MenuThongKeTheoDonHang
             // 
+            this.MenuThongKeTheoDonHang.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
+            this.MenuThongKeTheoDonHang.ForeColor = System.Drawing.Color.IndianRed;
             this.MenuThongKeTheoDonHang.Name = "MenuThongKeTheoDonHang";
-            this.MenuThongKeTheoDonHang.Size = new System.Drawing.Size(320, 34);
-            this.MenuThongKeTheoDonHang.Text = "Thống Kê Theo Đơn Hàng";
+            this.MenuThongKeTheoDonHang.Size = new System.Drawing.Size(350, 34);
+            this.MenuThongKeTheoDonHang.Text = "📉 Thống Kê Theo Đơn Hàng";
             // 
             // Form11
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(19F, 36F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(242)))), ((int)(((byte)(245)))));
             this.ClientSize = new System.Drawing.Size(1924, 902);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
@@ -174,7 +203,9 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.Name = "Form11";
-            this.Text = "Quản Lý Bán Hàng";
+            this.Text = "🏪 Quản Lý Bán Hàng";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form11_Paint);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -186,8 +217,8 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem hệThốngToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tàiKhoanToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem đăngKýTàiKhoảnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuTaiKhoan;
+        private System.Windows.Forms.ToolStripMenuItem MenuDangKyTaiKhoan;
         private System.Windows.Forms.ToolStripMenuItem danhMụcToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MenuNhanVien;
         private System.Windows.Forms.ToolStripMenuItem MenuKhachHang;
@@ -199,7 +230,50 @@
         private System.Windows.Forms.ToolStripMenuItem MenuThongKeTheoNhanVien;
         private System.Windows.Forms.ToolStripMenuItem MenuThongKeTheoDonHang;
         private System.Windows.Forms.ToolStripMenuItem MenuChatLieu;
+
+        // Custom event handler cho gradient background
+        private void Form11_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            System.Drawing.Drawing2D.LinearGradientBrush brush = new System.Drawing.Drawing2D.LinearGradientBrush(
+                this.ClientRectangle,
+                System.Drawing.Color.FromArgb(240, 242, 245),
+                System.Drawing.Color.FromArgb(225, 230, 235),
+                90F);
+            e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            brush.Dispose();
+        }
+    }
+
+    // Custom Renderer cho MenuStrip để có hiệu ứng hover đẹp hơn
+    public class CustomMenuStripRenderer : System.Windows.Forms.ToolStripProfessionalRenderer
+    {
+        protected override void OnRenderMenuItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs e)
+        {
+            if (!e.Item.Selected)
+            {
+                base.OnRenderMenuItemBackground(e);
+            }
+            else
+            {
+                System.Drawing.Rectangle rc = new System.Drawing.Rectangle(System.Drawing.Point.Empty, e.Item.Size);
+                System.Drawing.Color color = System.Drawing.Color.FromArgb(62, 142, 208);
+
+                using (System.Drawing.SolidBrush brush = new System.Drawing.SolidBrush(color))
+                {
+                    e.Graphics.FillRectangle(brush, rc);
+                }
+            }
+        }
+
+        protected override void OnRenderToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs e)
+        {
+            // Không vẽ border cho menu
+        }
+
+        protected override void OnRenderArrow(System.Windows.Forms.ToolStripArrowRenderEventArgs e)
+        {
+            e.ArrowColor = System.Drawing.Color.White;
+            base.OnRenderArrow(e);
+        }
     }
 }
-
-

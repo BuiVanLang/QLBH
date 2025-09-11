@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -157,14 +156,6 @@
             // 
             this.dataGridViewDangKy.AllowUserToAddRows = false;
             this.dataGridViewDangKy.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 12F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewDangKy.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewDangKy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDangKy.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
@@ -185,7 +176,7 @@
             this.ID.MinimumWidth = 8;
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
-            this.ID.Width = 73;
+            this.ID.Width = 61;
             // 
             // TenTaiKhoan
             // 
@@ -194,7 +185,7 @@
             this.TenTaiKhoan.MinimumWidth = 8;
             this.TenTaiKhoan.Name = "TenTaiKhoan";
             this.TenTaiKhoan.ReadOnly = true;
-            this.TenTaiKhoan.Width = 192;
+            this.TenTaiKhoan.Width = 136;
             // 
             // MatKhau
             // 
@@ -227,6 +218,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1353, 625);
+            this.ControlBox = false;
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.dataGridViewDangKy);
@@ -243,7 +235,6 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.Name = "FormDangKy";
-            this.Text = "FormDangKy";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDangKy)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

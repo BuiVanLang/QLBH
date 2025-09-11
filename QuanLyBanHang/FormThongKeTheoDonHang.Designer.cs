@@ -39,6 +39,7 @@
             this.txtNhanVien = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lblTongTien = new System.Windows.Forms.Label();
+            this.buttonExport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongKe)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,7 +77,7 @@
             this.dgvThongKe.AllowUserToAddRows = false;
             this.dgvThongKe.AllowUserToDeleteRows = false;
             this.dgvThongKe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvThongKe.Location = new System.Drawing.Point(12, 278);
+            this.dgvThongKe.Location = new System.Drawing.Point(22, 275);
             this.dgvThongKe.Name = "dgvThongKe";
             this.dgvThongKe.ReadOnly = true;
             this.dgvThongKe.RowHeadersWidth = 62;
@@ -149,12 +150,23 @@
             this.lblTongTien.TabIndex = 11;
             this.lblTongTien.Text = "Tổng Cộng:";
             // 
+            // buttonExport
+            // 
+            this.buttonExport.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.buttonExport.Location = new System.Drawing.Point(459, 140);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(123, 38);
+            this.buttonExport.TabIndex = 12;
+            this.buttonExport.Text = "Export Excel";
+            this.buttonExport.UseVisualStyleBackColor = true;
+            // 
             // FormThongKeTheoDonHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 533);
             this.ControlBox = false;
+            this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.lblTongTien);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtNhanVien);
@@ -187,5 +199,6 @@
         private System.Windows.Forms.TextBox txtNhanVien;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblTongTien;
+        private System.Windows.Forms.Button buttonExport;
     }
 }

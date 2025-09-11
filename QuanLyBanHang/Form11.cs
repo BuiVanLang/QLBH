@@ -95,11 +95,41 @@ namespace QuanLyBanHang
                 frm.BringToFront();
             }
         }
-
+       
         private void báoCáoToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
            
+        }
+
+        private void hệThốngToolStripMenuItem_DropDownItemClicked(object sender, EventArgs e)
+        {
+            Form frm = null;
+            ToolStripItemClickedEventArgs args = e as ToolStripItemClickedEventArgs;
+            if (args == null) return;
+            switch (args.ClickedItem.Name)
+            {
+                case "MenuTaiKhoan":
+               frm = new FormTaiKhoan();
+                    break;
+                case "MenuDangKyTaiKhoan":
+                frm = new FormDangKy();
+                    break;
+            }
+
+            if (frm != null)
+            {
+                frm.MdiParent = this;
+                frm.WindowState = FormWindowState.Maximized;
+                frm.Show();
+                frm.BringToFront();
+            }
+
+        }
+
+        private void báoCáoToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
     }
