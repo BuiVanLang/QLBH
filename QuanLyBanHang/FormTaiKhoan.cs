@@ -104,5 +104,10 @@ namespace QuanLyBanHang
         {
             textBoxMatKhau.UseSystemPasswordChar = !checkBox1.Checked;
         }
+
+        private void textBoxMatKhau_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

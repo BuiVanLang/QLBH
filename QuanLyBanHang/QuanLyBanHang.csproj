@@ -227,6 +227,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -358,6 +359,24 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imgg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\immm.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\qlbh.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\aa.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

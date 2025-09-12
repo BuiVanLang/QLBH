@@ -46,7 +46,7 @@ namespace QuanLyBanHang
                         dataGridViewDangKy.Columns.Clear();
                         dataGridViewDangKy.AutoGenerateColumns = false;
 
-                        // Cột ẩn ID
+                        // Cột  ID
                         DataGridViewTextBoxColumn colID = new DataGridViewTextBoxColumn();
                         colID.Name = "ID";
                         colID.HeaderText = "ID";
@@ -330,5 +330,10 @@ namespace QuanLyBanHang
                 return false;
             }
         }
+
+        //private void FormDangKy_Load1(object sender, EventArgs e)
+        //{
+
+        //}
     }
 }

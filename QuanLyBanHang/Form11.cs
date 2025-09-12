@@ -131,6 +131,18 @@ namespace QuanLyBanHang
         {
 
         }
+
+        private void thoátToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormTaiKhoan frm = new FormTaiKhoan();
+            frm.Show();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     }
     
