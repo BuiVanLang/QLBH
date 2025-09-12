@@ -105,7 +105,7 @@
                 buttonXoa.Click += buttonXoa_Click;
                 buttonThoat.Click += buttonThoat_Click;
                 this.Load += FormHoaDonBan_Load;
-            this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
+            this.buttonExport.Click += new System.EventHandler(this.button1_Click);
         }
 
             private void FormHoaDonBan_Load(object sender, EventArgs e)
@@ -673,8 +673,28 @@
             application.Quit(); // đóng Excel để giải phóng
         }
 
-        private void buttonExport_Click(object sender, EventArgs e)
+        //private void buttonExport_Click(object sender, EventArgs e)
+        //{
+        //    SaveFileDialog saveFileDialog = new SaveFileDialog();
+        //    saveFileDialog.Title = "Excel File";
+        //    saveFileDialog.Filter = "Excel File|*.xlsx;*.xls;*.xlsm";
+        //    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+        //    {
+        //        try
+        //        {
+        //            ExportExcel(saveFileDialog.FileName);
+        //            MessageBox.Show("Xuất file thành công");
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Lỗi: " + ex.Message);
+        //        }
+        //    }
+        //}
+
+        private void button1_Click(object sender, EventArgs e)
         {
+
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "Excel File";
             saveFileDialog.Filter = "Excel File|*.xlsx;*.xls;*.xlsm";
