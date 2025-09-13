@@ -254,28 +254,63 @@ namespace QuanLyBanHang
             Excle.Application application = new Excle.Application();
             application.Application.Workbooks.Add(Type.Missing);
 
-            // Xuất tiêu đề cột
+            Excle._Worksheet worksheet = (Excle._Worksheet)application.ActiveSheet;
+
+            // ===== 1. Thêm tiêu đề lớn =====
+            worksheet.Cells[1, 1] = "Chi Tiết Hóa Đơn Bán";
+            worksheet.Range["A1:E1"].Merge(); // gộp ô từ A1 đến E1 (sửa E thành cột cuối cùng của bạn)
+            worksheet.Range["A1"].Font.Size = 16;
+            worksheet.Range["A1"].Font.Bold = true;
+            worksheet.Range["A1"].HorizontalAlignment = Excle.XlHAlign.xlHAlignCenter;
+
+
+
+            int startRow = 5; // dòng bắt đầu cho header bảng
+
+            // ===== 3. Xuất tiêu đề cột =====
             for (int i = 0; i < dataGridViewChiTietHoaDon.Columns.Count; i++)
             {
-                application.Cells[1, i + 1] = dataGridViewChiTietHoaDon.Columns[i].HeaderText;
+                worksheet.Cells[startRow, i + 1] = dataGridViewChiTietHoaDon.Columns[i].HeaderText;
             }
 
-            // Xuất dữ liệu 
+            // ===== 4. Xuất dữ liệu =====
             for (int i = 0; i < dataGridViewChiTietHoaDon.Rows.Count; i++)
             {
-                if (dataGridViewChiTietHoaDon.Rows[i].IsNewRow) continue; // bỏ qua dòng trống
+                if (dataGridViewChiTietHoaDon.Rows[i].IsNewRow) continue;
 
                 for (int j = 0; j < dataGridViewChiTietHoaDon.Columns.Count; j++)
                 {
                     var value = dataGridViewChiTietHoaDon.Rows[i].Cells[j].Value;
-                    application.Cells[i + 2, j + 1] = value == null ? "" : value.ToString();
+                    worksheet.Cells[i + startRow + 1, j + 1] = value == null ? "" : value.ToString();
                 }
             }
 
-            application.Columns.AutoFit();
+            //// ===== 5. Xuất tổng tiền ở cuối =====
+            //int lastRow = startRow + dgvThongKe.Rows.Count + 1;
+            //worksheet.Cells[lastRow, 1] = lblTongTien.Text;
+            //worksheet.Range[$"A{lastRow}:E{lastRow}"].Font.Bold = true;
+
+            // ===== 6. Định dạng bảng =====
+            worksheet.Columns.AutoFit();
+            worksheet.Range[worksheet.Cells[startRow, 1], worksheet.Cells[startRow, dataGridViewChiTietHoaDon.Columns.Count]].Font.Bold = true;
+            worksheet.Range[worksheet.Cells[startRow, 1], worksheet.Cells[startRow, dataGridViewChiTietHoaDon.Columns.Count]].Interior.Color =
+                System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
+
+            // ===== 7. Thêm border bao quanh vùng dữ liệu =====
+            int lastRow = startRow + dataGridViewChiTietHoaDon.Rows.Count - 1; // tính số dòng cuối
+
+            Excle.Range usedRange = worksheet.Range[
+     worksheet.Cells[startRow, 1],
+     worksheet.Cells[lastRow, dataGridViewChiTietHoaDon.Columns.Count]
+ ];
+
+            usedRange.Borders.LineStyle = Excle.XlLineStyle.xlContinuous;
+            usedRange.Borders.Weight = Excle.XlBorderWeight.xlThin;
+
+            // ===== 8. Lưu file =====
             application.ActiveWorkbook.SaveCopyAs(path);
             application.ActiveWorkbook.Saved = true;
-            application.Quit(); // đóng Excel để giải phóng
+            application.Quit();
         }
 
         private void buttonExport_Click(object sender, EventArgs e)
