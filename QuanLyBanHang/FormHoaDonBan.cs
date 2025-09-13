@@ -96,7 +96,7 @@
                 dataGridViewHoaDonBan.AllowUserToAddRows = false;
                 dataGridViewHoaDonBan.AllowUserToDeleteRows = false;
             }
-
+        // comment
             private void SetupEventHandlers()
             {
                 dataGridViewHoaDonBan.CellClick += dataGridViewHoaDonBan_CellClick;
