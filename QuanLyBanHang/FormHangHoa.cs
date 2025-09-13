@@ -10,7 +10,7 @@ namespace QuanLyBanHang
 {
     public partial class FormHangHoa : Form
     {
-        private readonly string Nguon = @"Data Source=BuiVanLang;Initial Catalog=QLBH3;Integrated Security=True";
+        private readonly string Nguon = @"Data Source=DESKTOP-87TR50A\SQLEXPRESS;Initial Catalog=QLBH3;Integrated Security=True";
         private DataTable dtHangHoa;
         public FormHangHoa()
         {

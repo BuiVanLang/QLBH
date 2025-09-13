@@ -22,7 +22,7 @@ namespace QuanLyBanHang
         }
 
         // Chuỗi kết nối SQL (chỉnh sửa theo CSDL của bạn)
-        private string Nguon = @"Data Source=BuiVanLang;Initial Catalog=QLBH3;Integrated Security=True";
+        private string Nguon = @"Data Source=DESKTOP-87TR50A\SQLEXPRESS;Initial Catalog=QLBH3;Integrated Security=True";
 
         // ===== Nút Đăng nhập =====
         private void buttonDangNhap_Click(object sender, EventArgs e)

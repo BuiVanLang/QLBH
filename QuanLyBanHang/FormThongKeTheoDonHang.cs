@@ -9,7 +9,7 @@ namespace QuanLyBanHang
 {
     public partial class FormThongKeTheoDonHang : Form
     {
-        private readonly string Nguon = @"Data Source=BuiVanLang;Initial Catalog=QLBH3;Integrated Security=True";
+        private readonly string Nguon = @"Data Source=DESKTOP-87TR50A\SQLEXPRESS;Initial Catalog=QLBH3;Integrated Security=True";
 
         public FormThongKeTheoDonHang()
         {
@@ -79,7 +79,9 @@ namespace QuanLyBanHang
 
                 // Tính tổng tiền
                 object tong = dt.Compute("SUM(ThanhTien)", "");
-                lblTongTien.Text = "Tổng cộng: " + string.Format("{0:N0}", tong);
+                lblTongTien.Text = "Hóa đơn: " + txtMaHD.Text +
+                                   " | Tổng cộng: " + string.Format("{0:N0}", tong) + " VNĐ";
+
             }
         }
         private void txtMaHoaDon_TextChanged(object sender, EventArgs e)
