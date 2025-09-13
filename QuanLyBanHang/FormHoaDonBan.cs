@@ -24,7 +24,7 @@
         {
             TimKiemHoaDonBan();
         }
-
+        // comment
         private void SetupDataGridView()
             {
                 dataGridViewHoaDonBan.Columns.Clear();
