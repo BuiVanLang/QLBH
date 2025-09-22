@@ -121,7 +121,7 @@ namespace QuanLyBanHang
             // ===== 4. Xuất dữ liệu =====
             for (int i = 0; i < dgvThongKe.Rows.Count; i++)
             {
-                if (dgvThongKe.Rows[i].IsNewRow) continue;
+                if (dgvThongKe.Rows[i].IsNewRow) continue; // bỏ qua ròng rỗng cuối cùng để chạy tiếp
 
                 for (int j = 0; j < dgvThongKe.Columns.Count; j++)
                 {

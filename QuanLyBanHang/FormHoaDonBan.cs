@@ -54,8 +54,37 @@
                     ReadOnly = true,
                     Width = 200
                 });
+                  // Số lượng 
+                var colSoLuong = new DataGridViewTextBoxColumn
+                {
+                    Name = "SoLuong",
+                    HeaderText = "Số Lượng",
+                    DataPropertyName = "SoLuong",
+                    ReadOnly = true,
+                    Width = 80
+                };
+                    colSoLuong.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    dataGridViewHoaDonBan.Columns.Add(colSoLuong);
+                dataGridViewHoaDonBan.Columns.Add(new DataGridViewTextBoxColumn
+                        {
+                    Name = "DonGiaBan",
+                    HeaderText = "Đơn Giá Bán",
+                    DataPropertyName = "DonGiaBan",
+                    ReadOnly = true,
+                    Width = 120
+                });
 
                 dataGridViewHoaDonBan.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    Name = "ThanhTien",
+                    HeaderText = "Thành Tiền",
+                    DataPropertyName = "ThanhTien",
+                    ReadOnly = true,
+                    Width = 150
+                });
+
+
+            dataGridViewHoaDonBan.Columns.Add(new DataGridViewTextBoxColumn
                 {
                     Name = "ID_NhanVien",
                     HeaderText = "ID NV",
@@ -117,45 +146,48 @@
                 LoadData();
             }
 
-            // Load dữ liệu hóa đơn bán
-            private void LoadData()
+        // Load dữ liệu hóa đơn bán
+        private void LoadData()
+        {
+            try
             {
-                try
+                using (SqlConnection conn = new SqlConnection(Nguon))
                 {
-                    using (SqlConnection conn = new SqlConnection(Nguon))
-                    {
-                        // Đã sửa tên bảng và đảm bảo tên cột đúng
-                        string sql = @"SELECT h.ID,
-                                             h.ID_ChiTietHoaDonBan,
-                                             hh.TenHang,
-                                             h.ID_NhanVien,
-                                             nv.Ten as TenNhanVien,
-                                             h.ID_KhachHang,
-                                             kh.Ten as TenKhachHang
-                                       FROM HoaDonBan h
-                                       LEFT JOIN ChiTietHoaDonBan1 ct ON h.ID_ChiTietHoaDonBan = ct.ID
-                                       LEFT JOIN HangHoa hh ON ct.ID_HangHoa = hh.ID
-                                       LEFT JOIN NhanVien1 nv ON h.ID_NhanVien = nv.ID
-                                       LEFT JOIN KhachHang kh ON h.ID_KhachHang = kh.ID
-                                       ORDER BY h.ID";
+                    string sql = @"SELECT h.ID,
+                                 h.ID_ChiTietHoaDonBan,
+                                 hh.TenHang,
+                                 ct.SoLuong,
+                                 hh.DonGiaBan,
+                                 (ct.SoLuong * hh.DonGiaBan) AS ThanhTien,
+                                 h.ID_NhanVien,
+                                 nv.Ten as TenNhanVien,
+                                 h.ID_KhachHang,
+                                 kh.Ten as TenKhachHang
+                          FROM HoaDonBan h
+                          LEFT JOIN ChiTietHoaDonBan1 ct ON h.ID_ChiTietHoaDonBan = ct.ID
+                          LEFT JOIN HangHoa hh ON ct.ID_HangHoa = hh.ID
+                          LEFT JOIN NhanVien1 nv ON h.ID_NhanVien = nv.ID
+                          LEFT JOIN KhachHang kh ON h.ID_KhachHang = kh.ID
+                          ORDER BY h.ID";
 
-                        SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                    SqlDataAdapter da = new SqlDataAdapter(sql, conn);
                     dtHoaDonBan = new DataTable();
                     da.Fill(dtHoaDonBan);
+
                     dataGridViewHoaDonBan.DataSource = dtHoaDonBan;
 
                     UpdateStatusLabel();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi khi tải dữ liệu hóa đơn: " + ex.Message, "Lỗi",
-                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
-            // Load ComboBox Chi Tiết Hóa Đơn (sẽ hiển thị tên hàng)
-            private void LoadChiTietHoaDon()
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải dữ liệu hóa đơn: " + ex.Message, "Lỗi",
+                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        //
+        // Load ComboBox Chi Tiết Hóa Đơn (sẽ hiển thị tên hàng)
+        private void LoadChiTietHoaDon()
             {
                 try
                 {
